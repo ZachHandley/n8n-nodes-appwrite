@@ -83,7 +83,7 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ## Credentials
 
-1. Make sure you have an instance of Appwrite, either self-hosted or on Cloud at https://cloud.appwrite.io
+1. Make sure you have an instance of Appwrite, either self-hosted or on Cloud at <https://cloud.appwrite.io>
 2. Once in, create a project, and then scroll down and create an API key
 3. Give it all securities you wish, only Functions, Databases, and Storage is required to use all functionality, however I will update it with more functionality as we go
 4. After creating your API key, go to Credentials and create a new Appwrite API credential, and paste in
@@ -98,11 +98,13 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ## Resources
 
-* [n8n community nodes documentation](https://docs.n8n.io/integrations/community-nodes/)
-* [appwrite website and documentation](https://appwrite.io)
-* [github repository](https://github.com/zachhandley/n8n-nodes-appwrite)
-* [my website](https://zachhandley.com)
+- [n8n community nodes documentation](https://docs.n8n.io/integrations/community-nodes/)
+- [appwrite website and documentation](https://appwrite.io)
+- [github repository](https://github.com/zachhandley/n8n-nodes-appwrite)
+- [my website](https://zachhandley.com)
 
 ## Changelog
+
+- 0.70.0 -- Update to support 1.5.x
 - 0.69.1 -- Fix to Update Document node
 - 0.69.0 -- Initial Release
