@@ -57,7 +57,9 @@ export class NAppwrite implements INodeType {
 		defaults: {
 			name: "Appwrite",
 		},
+		// @ts-expect-error
 		inputs: ["main"],
+		// @ts-expect-error
 		outputs: ["main"],
 		credentials: [
 			{

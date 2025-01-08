@@ -453,6 +453,10 @@ export const convertStringToQuery = (
 			if (value) {
 				return Query.lessThan(index.toString(), JSON.parse(value.toString()));
 			}
+		case "contains":
+			if (value) {
+				return Query.contains(index.toString(), JSON.parse(value.toString()));
+			}
 		case "greater_than":
 			if (value) {
 				return Query.greaterThan(

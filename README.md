@@ -26,7 +26,7 @@ This is an n8n community node. It lets you use _Appwrite_ in your n8n workflows.
 
 [Installation](#installation)
 [Operations](#operations)
-[Credentials](#credentials)  <!-- delete if no auth needed -->
+[Credentials](#credentials) <!-- delete if no auth needed -->
 [Compatibility](#compatibility)
 [Resources](#resources)
 
@@ -87,7 +87,7 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 2. Once in, create a project, and then scroll down and create an API key
 3. Give it all securities you wish, only Functions, Databases, and Storage is required to use all functionality, however I will update it with more functionality as we go
 4. After creating your API key, go to Credentials and create a new Appwrite API credential, and paste in
-`https://cloud.appwrite.io/v1` for your endpoint URL if you used Appwrite Cloud, otherwise use your endpoint
+   `https://cloud.appwrite.io/v1` for your endpoint URL if you used Appwrite Cloud, otherwise use your endpoint
 5. Put in your Project ID by copying it
 6. Paste in your API key
 7. You're good to go!
@@ -105,6 +105,8 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ## Changelog
 
+- 0.71.2 -- Update appwrite logo
+- 0.71.1 -- Update to support 1.6.x
 - 0.70.0 -- Update to support 1.5.x
 - 0.69.1 -- Fix to Update Document node
 - 0.69.0 -- Initial Release

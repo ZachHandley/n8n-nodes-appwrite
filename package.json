@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-nappwrite",
-  "version": "0.70.0",
+  "version": "0.71.2",
   "description": "N8N Nodes for Appwrite starting at 1.4.X and up, will be updated.",
   "keywords": [
     "n8n-community-node-package"
@@ -22,7 +22,7 @@
     "format": "prettier nodes credentials --write",
     "lint": "eslint nodes credentials package.json",
     "lintfix": "eslint nodes credentials package.json --fix",
-    "publish": "bun run build && npm publish --access public"
+    "deploy": "bun run build && npm publish --access public"
   },
   "files": [
     "dist"
@@ -37,18 +37,18 @@
     ]
   },
   "devDependencies": {
-    "@types/express": "^4.17.6",
-    "@types/request-promise-native": "~1.0.15",
-    "@typescript-eslint/parser": "~5.45",
-    "eslint": "^9.4.0",
-    "eslint-plugin-n8n-nodes-base": "^1.11.0",
+    "@types/express": "^4.17.21",
+    "@types/request-promise-native": "~1.0.21",
+    "@typescript-eslint/parser": "~5.45.1",
+    "eslint": "^9.17.0",
+    "eslint-plugin-n8n-nodes-base": "^1.16.3",
     "gulp": "^4.0.2",
-    "n8n-core": "*",
-    "n8n-workflow": "*",
-    "prettier": "^2.7.1",
+    "n8n-core": "^1.14.1",
+    "n8n-workflow": "^1.70.0",
+    "prettier": "^2.8.8",
     "typescript": "~4.8.4"
   },
   "dependencies": {
-    "node-appwrite": "^13.0.0"
+    "node-appwrite": "^14.1.0"
   }
 }
