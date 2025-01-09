@@ -12,7 +12,7 @@
 
 <br />
 <p align="center">
-    <a href="https://appwrite.io" target="_blank"><img width="260" height="" src="https://appwrite.io/images/appwrite.svg" alt="Appwrite Logo"></a>
+    <a href="https://appwrite.io" target="_blank"><img width="260" height="" src="https://appwrite.io/images/logos/appwrite.svg" alt="Appwrite Logo"></a>
     <br />
     <br />
     <b>A complete backend solution for your [Flutter / Vue / Angular / React / iOS / Android / *ANY OTHER*] app</b>

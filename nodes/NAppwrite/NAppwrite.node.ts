@@ -110,7 +110,7 @@ export class NAppwrite implements INodeType {
 	// is supposed to do.
 	// You can make async calls and use `await`.
 	async execute(
-		this: IExecuteFunctions
+		this: IExecuteFunctions,
 	): Promise<INodeExecutionData[][] | NodeExecutionWithMetadata[][] | null> {
 		const returnData: IDataObject[] = [];
 
@@ -118,7 +118,7 @@ export class NAppwrite implements INodeType {
 		const resource = this.getNodeParameter("resource", 0) as string;
 		const operation = this.getNodeParameter("operation", 0) as string;
 		const { url, projectId, apiKey } = (await this.getCredentials(
-			"nAppwriteApi"
+			"nAppwriteApi",
 		)) as { url: string; projectId: string; apiKey: string };
 		const appwriteClient = await getAppwriteClient(url, projectId, apiKey);
 		try {
@@ -146,7 +146,7 @@ export class NAppwrite implements INodeType {
 						databaseId,
 						collectionId,
 						documentId,
-						body
+						body,
 					);
 					returnData.push(responseData);
 				}
@@ -155,21 +155,34 @@ export class NAppwrite implements INodeType {
 					// get additional fields input
 					const optionalFields = this.getNodeParameter(
 						"additionalFields",
-						0
+						0,
 					) as IDataObject;
 					const queriesToSend: string[] = [];
-
-					if (optionalFields.options) {
-						const queries = optionalFields.query as IDataObject[];
+					if (optionalFields.queries) {
+						const queriesData = optionalFields.queries as {
+							queriesData: {
+								query: string;
+								index: string;
+								value1?: string;
+								value2?: string;
+							}[];
+						};
+						const queries = queriesData.queriesData;
 						if (queries) {
 							for (const query of queries) {
-								queriesToSend.push(
-									convertStringToQuery(
-										`${query.index}`,
-										query.value as string,
-										(query.value2 as string) ?? undefined
-									)
+								const queryString = convertStringToQuery(
+									`${query.query}`,
+									`${query.index}`,
+									query.value1 && query.value1.length > 0
+										? (query.value1 as string)
+										: undefined,
+									query.value2 && query.value2.length > 0
+										? (query.value2 as string)
+										: undefined,
 								);
+								if (queryString && queryString.length > 0) {
+									queriesToSend.push(queryString);
+								}
 							}
 						}
 					}
@@ -178,7 +191,7 @@ export class NAppwrite implements INodeType {
 						appwriteClient,
 						databaseId,
 						collectionId,
-						queriesToSend
+						queriesToSend,
 					);
 					returnData.push(responseData);
 				}
@@ -188,7 +201,7 @@ export class NAppwrite implements INodeType {
 					const documentId = this.getNodeParameter("documentId", 0) as string;
 					const optionalFields = this.getNodeParameter(
 						"additionalFields",
-						0
+						0,
 					) as IDataObject;
 					const queriesToSend: string[] = [];
 
@@ -196,7 +209,7 @@ export class NAppwrite implements INodeType {
 						const queries = optionalFields.query as IDataObject[];
 						console.log(
 							"Inside optional fields, options value: ",
-							optionalFields.options
+							optionalFields.options,
 						);
 						console.log("Queries found: ", queries);
 						if (queries) {
@@ -205,8 +218,8 @@ export class NAppwrite implements INodeType {
 									convertStringToQuery(
 										`${query.index}`,
 										query.value as string,
-										(query.value2 as string) ?? undefined
-									)
+										(query.value2 as string) ?? undefined,
+									),
 								);
 							}
 						}
@@ -216,7 +229,7 @@ export class NAppwrite implements INodeType {
 						databaseId,
 						collectionId,
 						documentId,
-						queriesToSend
+						queriesToSend,
 					);
 					returnData.push(responseData);
 				}
@@ -232,7 +245,7 @@ export class NAppwrite implements INodeType {
 						databaseId,
 						collectionId,
 						documentId,
-						body
+						body,
 					);
 					returnData.push(responseData);
 				}
@@ -245,7 +258,7 @@ export class NAppwrite implements INodeType {
 						appwriteClient,
 						databaseId,
 						collectionId,
-						documentId
+						documentId,
 					);
 					returnData.push({ response: responseData });
 				}
@@ -263,7 +276,7 @@ export class NAppwrite implements INodeType {
 					responseData = await runAppwriteFunction(
 						appwriteClient,
 						functionId,
-						data
+						data,
 					);
 					returnData.push(responseData);
 				}
@@ -281,7 +294,7 @@ export class NAppwrite implements INodeType {
 					responseData = await getAppwriteStorageFile(
 						appwriteClient,
 						bucketId,
-						fileId
+						fileId,
 					);
 					returnData.push(responseData);
 				} else if (operation === "createBucket") {
@@ -289,16 +302,16 @@ export class NAppwrite implements INodeType {
 					const permissions = this.getNodeParameter("permissions", 0) as string;
 					const fileSecurity = this.getNodeParameter(
 						"fileSecurity",
-						0
+						0,
 					) as boolean;
 					const enabled = this.getNodeParameter("enabled", 0) as boolean;
 					const maximumFileSize = this.getNodeParameter(
 						"maximumFileSize",
-						0
+						0,
 					) as number;
 					const allowedFileExtensions = this.getNodeParameter(
 						"allowedFileExtensions",
-						0
+						0,
 					) as string;
 					const compression = this.getNodeParameter("compression", 0) as string;
 					const encryption = this.getNodeParameter("encryption", 0) as boolean;
@@ -318,27 +331,28 @@ export class NAppwrite implements INodeType {
 							.map((fileExtension: string) => fileExtension.trim()),
 						compression,
 						encryption,
-						antivirus
+						antivirus,
 					);
 					returnData.push(responseData);
 				} else if (operation === "createFile") {
 					const bucketId = this.getNodeParameter("bucketId", 0) as string;
-					const file = this.getNodeParameter("file", 0) as string;
+					const file = this.getNodeParameter("file", 0) as Blob | File | Buffer;
 					const fileName = this.getNodeParameter("fileName", 0) as string;
 					const mimeType = this.getNodeParameter("mimeType", 0) as string;
+					const fileObject = new File([file], fileName, { type: mimeType });
 					responseData = await createAppwriteStorageFile(
 						appwriteClient,
 						bucketId,
-						file,
+						fileObject,
 						fileName,
-						mimeType.split(",").map((mimeType: string) => mimeType.trim())
+						mimeType.split(",").map((mimeType: string) => mimeType.trim()),
 					);
 					returnData.push(responseData);
 				} else if (operation === "deleteBucket") {
 					const bucketId = this.getNodeParameter("bucketId", 0) as string;
 					responseData = await deleteAppwriteStorageBucket(
 						appwriteClient,
-						bucketId
+						bucketId,
 					);
 					returnData.push({ success: responseData });
 				} else if (operation === "deleteFile") {
@@ -347,7 +361,7 @@ export class NAppwrite implements INodeType {
 					responseData = await deleteAppwriteStorageFile(
 						appwriteClient,
 						bucketId,
-						fileId
+						fileId,
 					);
 					returnData.push({ success: responseData });
 				}
@@ -360,13 +374,13 @@ export class NAppwrite implements INodeType {
 					const email = this.getNodeParameter("email", 0) as string;
 					const verifyEmail = this.getNodeParameter(
 						"verifyEmail",
-						0
+						0,
 					) as boolean;
 					const name = this.getNodeParameter("name", 0) as string;
 					const phone = this.getNodeParameter("phone", 0) as string;
 					const verifyPhone = this.getNodeParameter(
 						"verifyPhone",
-						0
+						0,
 					) as boolean;
 					const password = this.getNodeParameter("password", 0) as string;
 					responseData = await createAppwriteUser(
@@ -375,7 +389,7 @@ export class NAppwrite implements INodeType {
 						email,
 						password,
 						phone,
-						name
+						name,
 					);
 					if (verifyEmail || verifyPhone) {
 						if (verifyEmail && verifyPhone) {
@@ -389,14 +403,14 @@ export class NAppwrite implements INodeType {
 								undefined,
 								undefined,
 								undefined,
-								verifyPhone
+								verifyPhone,
 							);
 						} else if (verifyEmail) {
 							await updateAppwriteUser(
 								appwriteClient,
 								responseData.$id,
 								undefined,
-								verifyEmail
+								verifyEmail,
 							);
 						} else if (verifyPhone) {
 							await updateAppwriteUser(
@@ -409,7 +423,7 @@ export class NAppwrite implements INodeType {
 								undefined,
 								undefined,
 								undefined,
-								verifyPhone
+								verifyPhone,
 							);
 						}
 					}
@@ -424,14 +438,14 @@ export class NAppwrite implements INodeType {
 					responseData = await deleteAppwriteUserSession(
 						appwriteClient,
 						userId,
-						sessionId
+						sessionId,
 					);
 					returnData.push({ success: responseData });
 				} else if (operation === "deleteUserSessions") {
 					const userId = this.getNodeParameter("userId", 0) as string;
 					responseData = await deleteAppwriteUserSessions(
 						appwriteClient,
-						userId
+						userId,
 					);
 					returnData.push({ success: responseData });
 				} else if (operation === "getUser") {
@@ -446,7 +460,7 @@ export class NAppwrite implements INodeType {
 					const userId = this.getNodeParameter("userId", 0) as string;
 					responseData = await listAppwriteUserIdentities(
 						appwriteClient,
-						userId
+						userId,
 					);
 					returnData.push(responseData);
 				} else if (operation === "listUserLogs") {
@@ -457,7 +471,7 @@ export class NAppwrite implements INodeType {
 					const userId = this.getNodeParameter("userId", 0) as string;
 					responseData = await listAppwriteUserMemberships(
 						appwriteClient,
-						userId
+						userId,
 					);
 					returnData.push(responseData);
 				} else if (operation === "listUserSessions") {
@@ -467,25 +481,34 @@ export class NAppwrite implements INodeType {
 				} else if (operation === "listUsers") {
 					const optionalFields = this.getNodeParameter(
 						"additionalFields",
-						0
+						0,
 					) as IDataObject;
 					const queriesToSend: string[] = [];
-					if (optionalFields.options) {
-						const queries = optionalFields.query as IDataObject[];
-						console.log(
-							"Inside optional fields, options value: ",
-							optionalFields.options
-						);
-						console.log("Queries found: ", queries);
+					if (optionalFields.queries) {
+						const queriesData = optionalFields.queries as {
+							queriesData: {
+								query: string;
+								index: string;
+								value1?: string;
+								value2?: string;
+							}[];
+						};
+						const queries = queriesData.queriesData;
 						if (queries) {
 							for (const query of queries) {
-								queriesToSend.push(
-									convertStringToQuery(
-										`${query.index}`,
-										query.value as string,
-										(query.value2 as string) ?? undefined
-									)
+								const queryString = convertStringToQuery(
+									`${query.query}`,
+									`${query.index}`,
+									query.value1 && query.value1.length > 0
+										? (query.value1 as string)
+										: undefined,
+									query.value2 && query.value2.length > 0
+										? (query.value2 as string)
+										: undefined,
 								);
+								if (queryString && queryString.length > 0) {
+									queriesToSend.push(queryString);
+								}
 							}
 						}
 					}
@@ -525,7 +548,7 @@ export class NAppwrite implements INodeType {
 						phone,
 						verifyPhone,
 						labels,
-						status
+						status,
 					);
 					returnData.push(responseData);
 				}

@@ -1,0 +1,53 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "pnpm@latest": {
+      "last_modified": "2024-12-30T19:01:31Z",
+      "resolved": "github:NixOS/nixpkgs/6d96c9a21e56eefbf7d6e9890fa2905daad5c1be#pnpm",
+      "source": "devbox-search",
+      "version": "9.15.2",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/1zf44gijyhydwf3h5bb73ksma9kbra17-pnpm-9.15.2",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/1zf44gijyhydwf3h5bb73ksma9kbra17-pnpm-9.15.2"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/f67sv0mxhj68f82x3xq0sqhqvgvcgpzi-pnpm-9.15.2",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/f67sv0mxhj68f82x3xq0sqhqvgvcgpzi-pnpm-9.15.2"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/yn15jif4fxf412ivqb1v7vs608h4ajzr-pnpm-9.15.2",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/yn15jif4fxf412ivqb1v7vs608h4ajzr-pnpm-9.15.2"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/8hd8pqjprqniahibmn6mrczfhb9b25ij-pnpm-9.15.2",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/8hd8pqjprqniahibmn6mrczfhb9b25ij-pnpm-9.15.2"
+        }
+      }
+    }
+  }
+}

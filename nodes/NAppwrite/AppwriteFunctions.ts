@@ -9,7 +9,6 @@ import {
 	ID,
 	Compression,
 } from "node-appwrite";
-import { InputFile } from "node-appwrite/dist/inputFile";
 
 export async function getAppwriteClient(
 	endpoint: string,
@@ -377,7 +376,7 @@ export async function listAppwriteStorage(
 export async function createAppwriteStorageFile(
 	client: Client,
 	bucketId: string,
-	file: InputFile,
+	file: File,
 	fileName: string,
 	mimeType: string[]
 ): Promise<Models.File> {
@@ -431,10 +430,13 @@ export async function deleteAppwriteStorageBucket(
 }
 
 const safeJSONParse = (value: string | number): any => {
+	console.log("Safe JSON Parse: ", value);
 	if (typeof value === "number") return value;
 	try {
+		console.log("Trying to parse: ", value);
 		return JSON.parse(value);
 	} catch {
+		console.log("Failed to parse: ", value);
 		return value; // Return original value if not JSON
 	}
 };
@@ -445,13 +447,15 @@ export const convertStringToQuery = (
 	value?: string | number,
 	value2?: string
 ) => {
-	switch (query.toLowerCase()) {
+	console.log("Converting Query: ", query);
+	switch (query) {
 		case "select":
 			if (value) {
 				return Query.select(safeJSONParse(value));
 			}
 			return "";
 		case "equal":
+			console.log("Equal Query: ", value, value2);
 			if (value && value2) {
 				return Query.equal(index, [
 					safeJSONParse(value),

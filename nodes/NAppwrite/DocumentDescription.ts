@@ -185,6 +185,12 @@ export const documentFields: INodeProperties[] = [
 											"Returns document if attribute value falls between the two values. The boundary values are inclusive and can be strings or numbers.",
 									},
 									{
+										name: "Contains",
+										value: "contains",
+										description:
+											"Returns documents if attribute contains the provided value",
+									},
+									{
 										name: "Cursor After",
 										value: "cursor_after",
 										description:
@@ -273,12 +279,6 @@ export const documentFields: INodeProperties[] = [
 										value: "order_descending",
 										description:
 											"Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.",
-									},
-									{
-										name: "Contains",
-										value: "contains",
-										description:
-											"Returns documents if attribute contains the provided value",
 									},
 									{
 										name: "Search",
