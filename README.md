@@ -34,6 +34,10 @@ This is an n8n community node. It lets you use _Appwrite_ in your n8n workflows.
 
 Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
 
+### NOTE
+
+This package is called `n8n-nodes-nappwrite` -- I apologize for having my other package, `n8n-nodes-appwriten8n`, I hated the extra `n8n` at the expense of the other guys package, called `n8n-nodes-appwrite`, and didn't mean to double post it
+
 ## Operations
 
 - Documents
@@ -105,6 +109,7 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ## Changelog
 
+- 0.71.3 -- Try fixing the Query strings via a `safeParseJSON`
 - 0.71.2 -- Update appwrite logo
 - 0.71.1 -- Update to support 1.6.x
 - 0.70.0 -- Update to support 1.5.x

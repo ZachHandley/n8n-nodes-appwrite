@@ -430,112 +430,178 @@ export async function deleteAppwriteStorageBucket(
 	return storage.deleteBucket(bucketId);
 }
 
+const safeJSONParse = (value: string | number): any => {
+	if (typeof value === "number") return value;
+	try {
+		return JSON.parse(value);
+	} catch {
+		return value; // Return original value if not JSON
+	}
+};
+
 export const convertStringToQuery = (
 	query: string,
 	index: string,
 	value?: string | number,
 	value2?: string
 ) => {
-	switch (query) {
+	switch (query.toLowerCase()) {
 		case "select":
 			if (value) {
-				return Query.select(JSON.parse(value.toString()));
+				return Query.select(safeJSONParse(value));
 			}
+			return "";
 		case "equal":
-			if (value) {
-				return Query.equal(index, JSON.parse(value.toString()));
+			if (value && value2) {
+				return Query.equal(index, [
+					safeJSONParse(value),
+					safeJSONParse(value2),
+				]);
+			} else if (value) {
+				return Query.equal(index, safeJSONParse(value));
+			} else if (value2) {
+				return Query.equal(index, safeJSONParse(value2));
+			} else {
+				return "";
 			}
 		case "not_equal":
-			if (value) {
-				return Query.notEqual(index.toString(), JSON.parse(value.toString()));
+			if (value && value2) {
+				return Query.notEqual(index, [
+					safeJSONParse(value),
+					safeJSONParse(value2),
+				]);
+			} else if (value) {
+				return Query.notEqual(index, safeJSONParse(value));
+			} else if (value2) {
+				return Query.notEqual(index, safeJSONParse(value2));
+			} else {
+				return "";
 			}
 		case "less_than":
-			if (value) {
-				return Query.lessThan(index.toString(), JSON.parse(value.toString()));
+			if (value && value2) {
+				return Query.lessThan(index, [
+					safeJSONParse(value),
+					safeJSONParse(value2),
+				]);
+			} else if (value) {
+				return Query.lessThan(index, safeJSONParse(value));
+			} else if (value2) {
+				return Query.lessThan(index, safeJSONParse(value2));
+			} else {
+				return "";
 			}
 		case "contains":
-			if (value) {
-				return Query.contains(index.toString(), JSON.parse(value.toString()));
+			if (value && value2) {
+				return Query.contains(index, [
+					safeJSONParse(value),
+					safeJSONParse(value2),
+				]);
+			} else if (value) {
+				return Query.contains(index, safeJSONParse(value));
+			} else if (value2) {
+				return Query.contains(index, safeJSONParse(value2));
+			} else {
+				return "";
 			}
 		case "greater_than":
-			if (value) {
-				return Query.greaterThan(
-					index.toString(),
-					JSON.parse(value.toString())
-				);
+			if (value && value2) {
+				return Query.greaterThan(index, [
+					safeJSONParse(value),
+					safeJSONParse(value2),
+				]);
+			} else if (value) {
+				return Query.greaterThan(index, safeJSONParse(value));
+			} else if (value2) {
+				return Query.greaterThan(index, safeJSONParse(value2));
+			} else {
+				return "";
 			}
 		case "less_than_or_equal":
-			if (value) {
-				return Query.lessThanEqual(
-					index.toString(),
-					JSON.parse(value.toString())
-				);
+			if (value && value2) {
+				return Query.lessThanEqual(index, [
+					safeJSONParse(value),
+					safeJSONParse(value2),
+				]);
+			} else if (value) {
+				return Query.lessThanEqual(index, safeJSONParse(value));
+			} else if (value2) {
+				return Query.lessThanEqual(index, safeJSONParse(value2));
+			} else {
+				return "";
 			}
 		case "greater_than_or_equal":
-			if (value) {
-				return Query.greaterThanEqual(
-					index.toString(),
-					JSON.parse(value.toString())
-				);
+			if (value && value2) {
+				return Query.greaterThanEqual(index, [
+					safeJSONParse(value),
+					safeJSONParse(value2),
+				]);
+			} else if (value) {
+				return Query.greaterThanEqual(index, safeJSONParse(value));
+			} else if (value2) {
+				return Query.greaterThanEqual(index, safeJSONParse(value2));
+			} else {
+				return "";
 			}
 		case "greater_than":
-			if (value) {
-				return Query.greaterThan(
-					value.toString(),
-					JSON.parse(value.toString())
-				);
+			if (value && value2) {
+				return Query.greaterThan(index, [
+					safeJSONParse(value),
+					safeJSONParse(value2),
+				]);
+			} else if (value) {
+				return Query.greaterThan(index, safeJSONParse(value));
+			} else if (value2) {
+				return Query.greaterThan(index, safeJSONParse(value2));
+			} else {
+				return "";
 			}
 		case "between":
 			if (index && value && value2) {
-				return Query.between(
-					index.toString(),
-					value.toString(),
-					JSON.parse(value2.toString())
-				);
+				return Query.between(index, value, safeJSONParse(value2));
 			}
 		case "is_null":
 			if (value) {
-				return Query.isNull(index.toString());
+				return Query.isNull(index);
 			}
 		case "is_not_null":
 			if (value) {
-				return Query.isNotNull(index.toString());
+				return Query.isNotNull(index);
 			}
 		case "starts_with":
 			if (value) {
-				return Query.startsWith(index.toString(), JSON.parse(value.toString()));
+				return Query.startsWith(index, safeJSONParse(value));
 			}
 		case "ends_with":
 			if (value) {
-				return Query.endsWith(index.toString(), JSON.parse(value.toString()));
+				return Query.endsWith(index, safeJSONParse(value));
 			}
 		case "search":
 			if (value) {
-				return Query.search(index.toString(), JSON.parse(value.toString()));
+				return Query.search(index, safeJSONParse(value));
 			}
 		case "order_descending":
 			if (value) {
-				return Query.orderDesc(index.toString());
+				return Query.orderDesc(index);
 			}
 		case "order_ascending":
 			if (value) {
-				return Query.orderAsc(index.toString());
+				return Query.orderAsc(index);
 			}
 		case "limit":
 			if (value) {
-				return Query.limit(JSON.parse(value.toString()));
+				return Query.limit(safeJSONParse(value));
 			}
 		case "offset":
 			if (value) {
-				return Query.offset(JSON.parse(value.toString()));
+				return Query.offset(safeJSONParse(value));
 			}
 		case "cursor_after":
 			if (value) {
-				return Query.cursorAfter(JSON.parse(value.toString()));
+				return Query.cursorAfter(safeJSONParse(value));
 			}
 		case "cursor_before":
 			if (value) {
-				return Query.cursorBefore(JSON.parse(value.toString()));
+				return Query.cursorBefore(safeJSONParse(value));
 			}
 		default:
 			return "";
