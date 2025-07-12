@@ -11,6 +11,13 @@ import {
 	Messaging,
 	Avatars,
 	Locale,
+	Tokens,
+	PasswordHash,
+	ExecutionMethod,
+	Browser,
+	CreditCard,
+	Flag,
+	SmtpEncryption,
 } from "node-appwrite";
 
 export async function getAppwriteClient(
@@ -66,7 +73,6 @@ export async function createAppwriteUser(
 ): Promise<Models.User<Models.Preferences>> {
 	const users = new Users(client);
 	if (userType) {
-		//TODO: Implement this for all user types
 		let user: Models.User<Models.Preferences>;
 		switch (userType) {
 			case "AlgoArgon2":
@@ -94,8 +100,7 @@ export async function createAppwriteUser(
 				}
 				break;
 			case "AlgoSha":
-				// @ts-ignore
-				user = await users.createSHAUser(id, email, password, name, phone);
+				user = await users.createSHAUser(id, email, password, PasswordHash.Sha256, name);
 				if (phone) {
 					await users.updatePhone(user.$id, phone);
 				}
@@ -359,7 +364,7 @@ export async function runAppwriteFunction(
 		data,
 		async,
 		xpath,
-		method,
+		method as ExecutionMethod,
 		headers,
 		scheduledAt
 	);
@@ -628,8 +633,174 @@ export const convertStringToQuery = (
 	}
 };
 
+/**
+ * MESSAGING SHIT
+ * 
+ */
 
 // MESSAGING FUNCTIONS
+
+// Provider-specific creation functions
+export async function createApnsProvider(
+	client: Client,
+	providerId: string,
+	name: string,
+	authKey?: string,
+	authKeyId?: string,
+	teamId?: string,
+	bundleId?: string,
+	sandbox?: boolean,
+	enabled?: boolean
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.createApnsProvider(providerId, name, authKey, authKeyId, teamId, bundleId, sandbox, enabled);
+}
+
+export async function createFcmProvider(
+	client: Client,
+	providerId: string,
+	name: string,
+	serviceAccountJSON?: object,
+	enabled?: boolean
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.createFcmProvider(providerId, name, serviceAccountJSON, enabled);
+}
+
+export async function createMailgunProvider(
+	client: Client,
+	providerId: string,
+	name: string,
+	apiKey?: string,
+	domain?: string,
+	isEuRegion?: boolean,
+	fromName?: string,
+	fromEmail?: string,
+	replyToName?: string,
+	replyToEmail?: string,
+	enabled?: boolean
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.createMailgunProvider(providerId, name, apiKey, domain, isEuRegion, fromName, fromEmail, replyToName, replyToEmail, enabled);
+}
+
+export async function createMsg91Provider(
+	client: Client,
+	providerId: string,
+	name: string,
+	templateId?: string,
+	senderId?: string,
+	authKey?: string,
+	enabled?: boolean
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.createMsg91Provider(providerId, name, templateId, senderId, authKey, enabled);
+}
+
+export async function createSendgridProvider(
+	client: Client,
+	providerId: string,
+	name: string,
+	apiKey?: string,
+	fromName?: string,
+	fromEmail?: string,
+	replyToName?: string,
+	replyToEmail?: string,
+	enabled?: boolean
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.createSendgridProvider(providerId, name, apiKey, fromName, fromEmail, replyToName, replyToEmail, enabled);
+}
+
+export async function createSmtpProvider(
+	client: Client,
+	providerId: string,
+	name: string,
+	host: string,
+	port?: number,
+	username?: string,
+	password?: string,
+	encryption?: SmtpEncryption,
+	autoTLS?: boolean,
+	mailer?: string,
+	fromName?: string,
+	fromEmail?: string,
+	replyToName?: string,
+	replyToEmail?: string,
+	enabled?: boolean
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.createSmtpProvider(
+		providerId, 
+		name,
+		host, 
+		port, 
+		username, 
+		password, 
+		encryption, 
+		autoTLS, 
+		mailer, 
+		fromName, 
+		fromEmail, 
+		replyToName, 
+		replyToEmail, 
+		enabled
+	);
+}
+
+export async function createTelesignProvider(
+	client: Client,
+	providerId: string,
+	name: string,
+	from?: string,
+	customerId?: string,
+	apiKey?: string,
+	enabled?: boolean
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.createTelesignProvider(providerId, name, from, customerId, apiKey, enabled);
+}
+
+export async function createTextmagicProvider(
+	client: Client,
+	providerId: string,
+	name: string,
+	from?: string,
+	username?: string,
+	apiKey?: string,
+	enabled?: boolean
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.createTextmagicProvider(providerId, name, from, username, apiKey, enabled);
+}
+
+export async function createTwilioProvider(
+	client: Client,
+	providerId: string,
+	name: string,
+	from?: string,
+	accountSid?: string,
+	authToken?: string,
+	enabled?: boolean
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.createTwilioProvider(providerId, name, from, accountSid, authToken, enabled);
+}
+
+export async function createVonageProvider(
+	client: Client,
+	providerId: string,
+	name: string,
+	from?: string,
+	apiKey?: string,
+	apiSecret?: string,
+	enabled?: boolean
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.createVonageProvider(providerId, name, from, apiKey, apiSecret, enabled);
+}
+
+// Generic provider creation function (kept for backward compatibility)
 export async function createMessagingProvider(
 	client: Client,
 	providerId: string,
@@ -637,8 +808,9 @@ export async function createMessagingProvider(
 	providerType: string,
 	config: object
 ): Promise<Models.Provider> {
-	const messaging = new Messaging(client);
-	return messaging.createProvider(providerId, name, providerType, config);
+	// This is a placeholder - the actual Appwrite SDK uses specific provider functions
+	// This function should not be used directly in the new implementation
+	throw new Error("Use specific provider creation functions like createApnsProvider, createFcmProvider, etc.");
 }
 
 export async function getMessagingProvider(
@@ -657,6 +829,167 @@ export async function listMessagingProviders(
 	return messaging.listProviders(queries);
 }
 
+// Provider-specific update functions
+export async function updateApnsProvider(
+	client: Client,
+	providerId: string,
+	name?: string,
+	enabled?: boolean,
+	authKey?: string,
+	authKeyId?: string,
+	teamId?: string,
+	bundleId?: string,
+	sandbox?: boolean
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.updateApnsProvider(providerId, name, enabled, authKey, authKeyId, teamId, bundleId, sandbox);
+}
+
+export async function updateFcmProvider(
+	client: Client,
+	providerId: string,
+	name?: string,
+	enabled?: boolean,
+	serviceAccountJSON?: object
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.updateFcmProvider(providerId, name, enabled, serviceAccountJSON);
+}
+
+export async function updateMailgunProvider(
+	client: Client,
+	providerId: string,
+	name?: string,
+	enabled?: boolean,
+	apiKey?: string,
+	domain?: string,
+	isEuRegion?: boolean,
+	fromName?: string,
+	fromEmail?: string,
+	replyToName?: string,
+	replyToEmail?: string
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.updateMailgunProvider(providerId, name, apiKey, domain, isEuRegion, enabled, fromName, fromEmail, replyToName, replyToEmail);
+}
+
+export async function updateMsg91Provider(
+	client: Client,
+	providerId: string,
+	name?: string,
+	enabled?: boolean,
+	templateId?: string,
+	senderId?: string,
+	authKey?: string
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.updateMsg91Provider(providerId, name, enabled, templateId, senderId, authKey);
+}
+
+export async function updateSendgridProvider(
+	client: Client,
+	providerId: string,
+	name?: string,
+	enabled?: boolean,
+	apiKey?: string,
+	fromName?: string,
+	fromEmail?: string,
+	replyToName?: string,
+	replyToEmail?: string
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.updateSendgridProvider(providerId, name, enabled, apiKey, fromName, fromEmail, replyToName, replyToEmail);
+}
+
+export async function updateSmtpProvider(
+	client: Client,
+	providerId: string,
+	name?: string,
+	enabled?: boolean,
+	host?: string,
+	port?: number,
+	username?: string,
+	password?: string,
+	encryption?: SmtpEncryption,
+	autoTLS?: boolean,
+	mailer?: string,
+	fromName?: string,
+	fromEmail?: string,
+	replyToName?: string,
+	replyToEmail?: string
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.updateSmtpProvider(
+		providerId, 
+		name, 
+		host, 
+		port, 
+		username, 
+		password, 
+		encryption, 
+		autoTLS, 
+		mailer, 
+		fromName, 
+		fromEmail, 
+		replyToName, 
+		replyToEmail,
+		enabled,
+	);
+}
+
+export async function updateTelesignProvider(
+	client: Client,
+	providerId: string,
+	name?: string,
+	enabled?: boolean,
+	from?: string,
+	customerId?: string,
+	apiKey?: string
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.updateTelesignProvider(providerId, name, enabled, from, customerId, apiKey);
+}
+
+export async function updateTextmagicProvider(
+	client: Client,
+	providerId: string,
+	name?: string,
+	enabled?: boolean,
+	from?: string,
+	username?: string,
+	apiKey?: string
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.updateTextmagicProvider(providerId, name, enabled, from, username, apiKey);
+}
+
+export async function updateTwilioProvider(
+	client: Client,
+	providerId: string,
+	name?: string,
+	enabled?: boolean,
+	from?: string,
+	accountSid?: string,
+	authToken?: string
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.updateTwilioProvider(providerId, name, enabled, from, accountSid, authToken);
+}
+
+export async function updateVonageProvider(
+	client: Client,
+	providerId: string,
+	name?: string,
+	enabled?: boolean,
+	from?: string,
+	apiKey?: string,
+	apiSecret?: string
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.updateVonageProvider(providerId, name, enabled, from, apiKey, apiSecret);
+}
+
+// Generic provider update function (kept for backward compatibility)
 export async function updateMessagingProvider(
 	client: Client,
 	providerId: string,
@@ -664,8 +997,9 @@ export async function updateMessagingProvider(
 	enabled?: boolean,
 	config?: object
 ): Promise<Models.Provider> {
-	const messaging = new Messaging(client);
-	return messaging.updateProvider(providerId, name, enabled, config);
+	// This is a placeholder - the actual Appwrite SDK uses specific provider functions
+	// This function should not be used directly in the new implementation
+	throw new Error("Use specific provider update functions like updateApnsProvider, updateFcmProvider, etc.");
 }
 
 export async function deleteMessagingProvider(
@@ -782,7 +1116,11 @@ export async function listMessagingSubscriberLogs(
 	queries?: string[]
 ): Promise<Models.LogList> {
 	const messaging = new Messaging(client);
-	return messaging.listSubscriberLogs(topicId, subscriberId, queries);
+	if (queries && queries.length > 0) {
+		const finalQueries = new Set(...queries, [Query.equal("topic", topicId)]);
+		return messaging.listSubscriberLogs(subscriberId, Array.from(finalQueries));
+	}
+	return messaging.listSubscriberLogs(subscriberId, [Query.equal("topic", topicId)]);
 }
 
 export async function createMessagingEmail(
@@ -991,8 +1329,9 @@ export async function deleteMessagingMessage(
 	client: Client,
 	messageId: string
 ): Promise<{}> {
-	const messaging = new Messaging(client);
-	return messaging.deleteMessage(messageId);
+	// Note: Appwrite doesn't support deleting messages directly
+	// Messages are sent and cannot be recalled
+	throw new Error("Appwrite does not support deleting messages after creation. Messages are automatically sent or scheduled.");
 }
 
 export async function listMessagingMessageLogs(
@@ -1010,23 +1349,27 @@ export async function listMessagingTargets(
 	queries?: string[]
 ): Promise<Models.TargetList> {
 	const messaging = new Messaging(client);
-	return messaging.listTargets(messageId, queries);
+	if (queries && queries.length > 0) {
+		return messaging.listTargets(messageId, queries);
+	}
+	return messaging.listTargets(messageId);
 }
 
 // AVATARS FUNCTIONS
 export async function getAvatarsBrowserFavicon(
 	client: Client,
-	url: string,
+	browser: Browser,
 	width?: number,
-	height?: number
+	height?: number,
+	quality?: number
 ): Promise<ArrayBuffer> {
 	const avatars = new Avatars(client);
-	return avatars.getBrowser(url, width, height);
+	return avatars.getBrowser(browser, width, height, quality);
 }
 
 export async function getAvatarsCreditCardIcon(
 	client: Client,
-	code: string,
+	code: CreditCard,
 	width?: number,
 	height?: number
 ): Promise<ArrayBuffer> {
@@ -1044,12 +1387,13 @@ export async function getAvatarsFavicon(
 
 export async function getAvatarsFlag(
 	client: Client,
-	code: string,
+	code: Flag,
 	width?: number,
-	height?: number
+	height?: number,
+	quality?: number
 ): Promise<ArrayBuffer> {
 	const avatars = new Avatars(client);
-	return avatars.getFlag(code, width, height);
+	return avatars.getFlag(code, width, height, quality);
 }
 
 export async function getAvatarsImage(
@@ -1144,10 +1488,48 @@ export async function getLocaleLanguages(
 // TOKENS FUNCTIONS
 export async function createFileToken(
 	client: Client,
+	bucketId: string,
 	fileId: string,
-	purpose?: string
-): Promise<Models.Token> {
-	// Note: Tokens functionality might need Account service instead of separate Tokens service
-	// This is a placeholder implementation - may need adjustment based on actual Appwrite SDK structure
-	throw new Error("Token functions require Account service implementation");
+	expire?: string
+): Promise<Models.ResourceToken> {
+	const tokens = new Tokens(client);
+	return tokens.createFileToken(bucketId, fileId, expire);
+}
+
+export async function deleteToken(
+	client: Client,
+	tokenId: string
+): Promise<void> {
+	const tokens = new Tokens(client);
+	await tokens.delete(tokenId);
+}
+
+export async function getToken(
+	client: Client,
+	tokenId: string
+): Promise<Models.ResourceToken> {
+	const tokens = new Tokens(client);
+	return tokens.get(tokenId);
+}
+
+export async function listTokens(
+	client: Client,
+	bucketId: string,
+	fileId: string,
+	queries?: string[]
+): Promise<Models.ResourceTokenList> {
+	const tokens = new Tokens(client);
+	if (queries && queries.length > 0) {
+		return tokens.list(bucketId, fileId, queries);
+	}
+	return tokens.list(bucketId, fileId);
+}
+
+export async function updateToken(
+	client: Client,
+	tokenId: string,
+	expire?: string
+): Promise<Models.ResourceToken> {
+	const tokens = new Tokens(client);
+	return tokens.update(tokenId, expire);
 }

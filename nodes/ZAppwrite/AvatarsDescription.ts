@@ -10,54 +10,54 @@ export const avatarsOperations: INodeProperties[] = [
 			{
 				name: "Get Browser Favicon",
 				displayName: "Get Browser Favicon",
-				value: "getBrowserFavicon",
+				value: "getAvatarsBrowserFavicon",
 				action: "Get browser favicon",
 				description: "Get browser favicon icon",
 			},
 			{
 				name: "Get Credit Card Icon",
 				displayName: "Get Credit Card Icon",
-				value: "getCreditCardIcon",
+				value: "getAvatarsCreditCardIcon",
 				action: "Get credit card icon",
 				description: "Get credit card provider icon",
 			},
 			{
 				name: "Get Favicon",
 				displayName: "Get Favicon",
-				value: "getFavicon",
+				value: "getAvatarsFavicon",
 				action: "Get favicon from URL",
 				description: "Get favicon from a website URL",
 			},
 			{
 				name: "Get Flag Icon",
 				displayName: "Get Flag Icon",
-				value: "getFlagIcon",
+				value: "getAvatarsFlag",
 				action: "Get country flag icon",
 				description: "Get country flag icon",
 			},
 			{
 				name: "Get Image From URL",
 				displayName: "Get Image from URL",
-				value: "getImageFromUrl",
+				value: "getAvatarsImage",
 				action: "Get image from URL",
 				description: "Get image from external URL",
 			},
 			{
 				name: "Get Initials",
 				displayName: "Get Initials",
-				value: "getInitials",
+				value: "getAvatarsInitials",
 				action: "Get initials avatar",
 				description: "Generate initials avatar",
 			},
 			{
 				name: "Get QR Code",
 				displayName: "Get QR Code",
-				value: "getQrCode",
+				value: "getAvatarsQR",
 				action: "Get QR code",
 				description: "Generate QR code",
 			},
 		],
-		default: "getFavicon",
+		default: "getAvatarsFavicon",
 		displayOptions: {
 			show: {
 				resource: ["avatars"],
@@ -69,42 +69,42 @@ export const avatarsOperations: INodeProperties[] = [
 export const avatarsFields: INodeProperties[] = [
 	// Browser Code
 	{
-		displayName: "Browser Code",
-		name: "code",
+		displayName: "Browser",
+		name: "browser",
 		type: "options",
 		required: true,
 		options: [
 			{
 				name: "Chrome",
-				value: "ch",
+				value: "Chrome",
 			},
 			{
 				name: "Edge",
-				value: "eg",
+				value: "Edge",
 			},
 			{
 				name: "Firefox",
-				value: "ff",
+				value: "Firefox",
 			},
 			{
 				name: "Internet Explorer",
-				value: "ie",
+				value: "InternetExplorer",
 			},
 			{
 				name: "Opera",
-				value: "op",
+				value: "Opera",
 			},
 			{
 				name: "Safari",
-				value: "sf",
+				value: "Safari",
 			},
 		],
-		default: "ch",
+		default: "Chrome",
 		description: "Browser code for favicon",
 		displayOptions: {
 			show: {
 				resource: ["avatars"],
-				operation: ["getBrowserFavicon"],
+				operation: ["getAvatarsBrowserFavicon"],
 			},
 		},
 	},
@@ -118,39 +118,39 @@ export const avatarsFields: INodeProperties[] = [
 		options: [
 			{
 				name: "American Express",
-				value: "amex",
+				value: "AmericanExpress",
 			},
 			{
 				name: "Diners Club",
-				value: "diners",
+				value: "DinersClub",
 			},
 			{
 				name: "Discover",
-				value: "discover",
+				value: "Discover",
 			},
 			{
 				name: "JCB",
-				value: "jcb",
+				value: "JCB",
 			},
 			{
 				name: "Mastercard",
-				value: "mastercard",
+				value: "Mastercard",
 			},
 			{
 				name: "UnionPay",
-				value: "unionpay",
+				value: "UnionPay",
 			},
 			{
 				name: "Visa",
-				value: "visa",
+				value: "Visa",
 			},
 		],
-		default: "visa",
+		default: "Visa",
 		description: "Credit card provider code",
 		displayOptions: {
 			show: {
 				resource: ["avatars"],
-				operation: ["getCreditCardIcon"],
+				operation: ["getAvatarsCreditCardIcon"],
 			},
 		},
 	},
@@ -167,7 +167,7 @@ export const avatarsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["avatars"],
-				operation: ["getFlagIcon"],
+				operation: ["getAvatarsFlag"],
 			},
 		},
 	},
@@ -184,7 +184,7 @@ export const avatarsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["avatars"],
-				operation: ["getFavicon"],
+				operation: ["getAvatarsFavicon"],
 			},
 		},
 	},
@@ -200,7 +200,7 @@ export const avatarsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["avatars"],
-				operation: ["getImageFromUrl"],
+				operation: ["getAvatarsImage"],
 			},
 		},
 	},
@@ -216,7 +216,7 @@ export const avatarsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["avatars"],
-				operation: ["getInitials"],
+				operation: ["getAvatarsInitials"],
 			},
 		},
 	},
@@ -233,7 +233,7 @@ export const avatarsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["avatars"],
-				operation: ["getQrCode"],
+				operation: ["getAvatarsQR"],
 			},
 		},
 	},

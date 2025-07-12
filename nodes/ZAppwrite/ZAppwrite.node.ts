@@ -48,9 +48,29 @@ import {
 	updateAppwriteUser,
 	// Messaging functions
 	createMessagingProvider,
+	createApnsProvider,
+	createFcmProvider,
+	createMailgunProvider,
+	createMsg91Provider,
+	createSendgridProvider,
+	createSmtpProvider,
+	createTelesignProvider,
+	createTextmagicProvider,
+	createTwilioProvider,
+	createVonageProvider,
 	getMessagingProvider,
 	listMessagingProviders,
 	updateMessagingProvider,
+	updateApnsProvider,
+	updateFcmProvider,
+	updateMailgunProvider,
+	updateMsg91Provider,
+	updateSendgridProvider,
+	updateSmtpProvider,
+	updateTelesignProvider,
+	updateTextmagicProvider,
+	updateTwilioProvider,
+	updateVonageProvider,
 	deleteMessagingProvider,
 	listMessagingProviderLogs,
 	createMessagingTopic,
@@ -72,7 +92,6 @@ import {
 	updateMessagingEmail,
 	updateMessagingPush,
 	updateMessagingSms,
-	deleteMessagingMessage,
 	listMessagingMessageLogs,
 	listMessagingTargets,
 	// Avatars functions
@@ -94,8 +113,12 @@ import {
 	getLocaleLanguages,
 	// Tokens functions
 	createFileToken,
+	deleteToken,
+	getToken,
+	listTokens,
+	updateToken,
 } from "./AppwriteFunctions";
-import { ID } from "node-appwrite";
+import { Browser, CreditCard, Flag, ID } from "node-appwrite";
 
 export class ZAppwrite implements INodeType {
 	description: INodeTypeDescription = {
@@ -151,7 +174,7 @@ export class ZAppwrite implements INodeType {
 						value: "storage",
 					},
 					{
-						name: "Tokens",
+						name: 'Token',
 						value: "tokens",
 					},
 					{
@@ -387,7 +410,7 @@ export class ZAppwrite implements INodeType {
 						"fileSecurity",
 						0,
 					) as boolean;
-					const enabled = this.getNodeParameter("enabled", 0) as boolean;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
 					const maximumFileSize = this.getNodeParameter(
 						"maximumFileSize",
 						0,
@@ -639,10 +662,97 @@ export class ZAppwrite implements INodeType {
 				// Provider operations
 				if (operation === "createProvider") {
 					const providerId = this.getNodeParameter("providerId", 0) as string;
-					const name = this.getNodeParameter("name", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
 					const providerType = this.getNodeParameter("providerType", 0) as string;
 					const config = this.getNodeParameter("config", 0) as object;
 					responseData = await createMessagingProvider(appwriteClient, providerId, name, providerType, config);
+					returnData.push(responseData);
+				} else if (operation === "createApnsProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const authKey = this.getNodeParameter("authKeyDirect", 0) as string;
+					const authKeyId = this.getNodeParameter("authKeyIdDirect", 0) as string;
+					const teamId = this.getNodeParameter("teamIdDirect", 0) as string;
+					const bundleId = this.getNodeParameter("bundleIdDirect", 0) as string;
+					const sandbox = this.getNodeParameter("sandboxDirect", 0) as boolean;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					responseData = await createApnsProvider(appwriteClient, providerId, name, authKey, authKeyId, teamId, bundleId, sandbox, enabled);
+					returnData.push(responseData);
+				} else if (operation === "createFcmProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const serviceAccountJSON = this.getNodeParameter("serviceAccountJSONDirect", 0) as object;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					responseData = await createFcmProvider(appwriteClient, providerId, name, serviceAccountJSON, enabled);
+					returnData.push(responseData);
+				} else if (operation === "createMailgunProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const apiKey = this.getNodeParameter("apiKeyDirectMailgun", 0) as string;
+					const domain = this.getNodeParameter("domainDirect", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					responseData = await createMailgunProvider(appwriteClient, providerId, name, apiKey, domain, undefined, undefined, undefined, undefined, undefined, enabled);
+					returnData.push(responseData);
+				} else if (operation === "createMsg91Provider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const senderId = this.getNodeParameter("senderIdDirect", 0) as string;
+					const authKey = this.getNodeParameter("authKeyDirectMsg91", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					responseData = await createMsg91Provider(appwriteClient, providerId, name, undefined, senderId, authKey, enabled);
+					returnData.push(responseData);
+				} else if (operation === "createSendgridProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const apiKey = this.getNodeParameter("apiKeyDirectSendgrid", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					responseData = await createSendgridProvider(appwriteClient, providerId, name, apiKey, undefined, undefined, undefined, undefined, enabled);
+					returnData.push(responseData);
+				} else if (operation === "createSmtpProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const host = this.getNodeParameter("hostDirect", 0) as string;
+					const port = this.getNodeParameter("portDirect", 0) as number;
+					const username = this.getNodeParameter("usernameDirect", 0) as string;
+					const password = this.getNodeParameter("passwordDirect", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					responseData = await createSmtpProvider(appwriteClient, providerId, name, host, port, username, password, undefined, undefined, undefined, undefined, undefined, undefined, undefined, enabled);
+					returnData.push(responseData);
+				} else if (operation === "createTelesignProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const from = this.getNodeParameter("fromDirectTelesign", 0) as string;
+					const customerId = this.getNodeParameter("customerIdDirect", 0) as string;
+					const apiKey = this.getNodeParameter("apiKeyDirectTelesign", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					responseData = await createTelesignProvider(appwriteClient, providerId, name, from, customerId, apiKey, enabled);
+					returnData.push(responseData);
+				} else if (operation === "createTextmagicProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const from = this.getNodeParameter("fromDirectTextmagic", 0) as string;
+					const username = this.getNodeParameter("usernameDirectTextmagic", 0) as string;
+					const apiKey = this.getNodeParameter("apiKeyDirectTextmagic", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					responseData = await createTextmagicProvider(appwriteClient, providerId, name, from, username, apiKey, enabled);
+					returnData.push(responseData);
+				} else if (operation === "createTwilioProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const from = this.getNodeParameter("fromDirectTwilio", 0) as string;
+					const accountSid = this.getNodeParameter("accountSidDirect", 0) as string;
+					const authToken = this.getNodeParameter("authTokenDirect", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					responseData = await createTwilioProvider(appwriteClient, providerId, name, from, accountSid, authToken, enabled);
+					returnData.push(responseData);
+				} else if (operation === "createVonageProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const from = this.getNodeParameter("fromDirectVonage", 0) as string;
+					const apiKey = this.getNodeParameter("apiKeyDirectVonage", 0) as string;
+					const apiSecret = this.getNodeParameter("apiSecretDirect", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					responseData = await createVonageProvider(appwriteClient, providerId, name, from, apiKey, apiSecret, enabled);
 					returnData.push(responseData);
 				} else if (operation === "getProvider") {
 					const providerId = this.getNodeParameter("providerId", 0) as string;
@@ -667,10 +777,93 @@ export class ZAppwrite implements INodeType {
 					returnData.push(responseData);
 				} else if (operation === "updateProvider") {
 					const providerId = this.getNodeParameter("providerId", 0) as string;
-					const name = this.getNodeParameter("name", 0) as string;
-					const enabled = this.getNodeParameter("enabled", 0) as boolean;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
 					const config = this.getNodeParameter("config", 0) as object;
 					responseData = await updateMessagingProvider(appwriteClient, providerId, name, enabled, config);
+					returnData.push(responseData);
+				} else if (operation === "updateApnsProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					const authKey = this.getNodeParameter("authKeyDirect", 0) as string;
+					const authKeyId = this.getNodeParameter("authKeyIdDirect", 0) as string;
+					const teamId = this.getNodeParameter("teamIdDirect", 0) as string;
+					const bundleId = this.getNodeParameter("bundleIdDirect", 0) as string;
+					const sandbox = this.getNodeParameter("sandboxDirect", 0) as boolean;
+					responseData = await updateApnsProvider(appwriteClient, providerId, name, enabled, authKey, authKeyId, teamId, bundleId, sandbox);
+					returnData.push(responseData);
+				} else if (operation === "updateFcmProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					const serviceAccountJSON = this.getNodeParameter("serviceAccountJSONDirect", 0) as object;
+					responseData = await updateFcmProvider(appwriteClient, providerId, name, enabled, serviceAccountJSON);
+					returnData.push(responseData);
+				} else if (operation === "updateMailgunProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					const apiKey = this.getNodeParameter("apiKeyDirectMailgun", 0) as string;
+					const domain = this.getNodeParameter("domainDirect", 0) as string;
+					responseData = await updateMailgunProvider(appwriteClient, providerId, name, enabled, apiKey, domain);
+					returnData.push(responseData);
+				} else if (operation === "updateMsg91Provider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					const senderId = this.getNodeParameter("senderIdDirect", 0) as string;
+					const authKey = this.getNodeParameter("authKeyDirectMsg91", 0) as string;
+					responseData = await updateMsg91Provider(appwriteClient, providerId, name, enabled, undefined, senderId, authKey);
+					returnData.push(responseData);
+				} else if (operation === "updateSendgridProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					const apiKey = this.getNodeParameter("apiKeyDirectSendgrid", 0) as string;
+					responseData = await updateSendgridProvider(appwriteClient, providerId, name, enabled, apiKey);
+					returnData.push(responseData);
+				} else if (operation === "updateSmtpProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					const host = this.getNodeParameter("hostDirect", 0) as string;
+					const port = this.getNodeParameter("portDirect", 0) as number;
+					const username = this.getNodeParameter("usernameDirect", 0) as string;
+					const password = this.getNodeParameter("passwordDirect", 0) as string;
+					responseData = await updateSmtpProvider(appwriteClient, providerId, name, enabled, host, port, username, password);
+					returnData.push(responseData);
+				} else if (operation === "updateTelesignProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					const customerId = this.getNodeParameter("customerIdDirect", 0) as string;
+					const apiKey = this.getNodeParameter("apiKeyDirectTelesign", 0) as string;
+					responseData = await updateTelesignProvider(appwriteClient, providerId, name, enabled, undefined, customerId, apiKey);
+					returnData.push(responseData);
+				} else if (operation === "updateTextmagicProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					const username = this.getNodeParameter("usernameDirectTextmagic", 0) as string;
+					const apiKey = this.getNodeParameter("apiKeyDirectTextmagic", 0) as string;
+					responseData = await updateTextmagicProvider(appwriteClient, providerId, name, enabled, undefined, username, apiKey);
+					returnData.push(responseData);
+				} else if (operation === "updateTwilioProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					const accountSid = this.getNodeParameter("accountSidDirect", 0) as string;
+					const authToken = this.getNodeParameter("authTokenDirect", 0) as string;
+					responseData = await updateTwilioProvider(appwriteClient, providerId, name, enabled, undefined, accountSid, authToken);
+					returnData.push(responseData);
+				} else if (operation === "updateVonageProvider") {
+					const providerId = this.getNodeParameter("providerId", 0) as string;
+					const name = this.getNodeParameter("providerName", 0) as string;
+					const enabled = this.getNodeParameter("enabledDirect", 0) as boolean;
+					const apiKey = this.getNodeParameter("apiKeyDirectVonage", 0) as string;
+					const apiSecret = this.getNodeParameter("apiSecretDirect", 0) as string;
+					responseData = await updateVonageProvider(appwriteClient, providerId, name, enabled, undefined, apiKey, apiSecret);
 					returnData.push(responseData);
 				} else if (operation === "deleteProvider") {
 					const providerId = this.getNodeParameter("providerId", 0) as string;
@@ -861,10 +1054,6 @@ export class ZAppwrite implements INodeType {
 						optionalFields.scheduledAt as string
 					);
 					returnData.push(responseData);
-				} else if (operation === "deleteMessage") {
-					const messageId = this.getNodeParameter("messageId", 0) as string;
-					responseData = await deleteMessagingMessage(appwriteClient, messageId);
-					returnData.push({ success: responseData });
 				} else if (operation === "listMessageLogs") {
 					const messageId = this.getNodeParameter("messageId", 0) as string;
 					responseData = await listMessagingMessageLogs(appwriteClient, messageId);
@@ -875,46 +1064,52 @@ export class ZAppwrite implements INodeType {
 					returnData.push(responseData);
 				}
 			} else if (resource === "avatars") {
-				if (operation === "getBrowserFavicon") {
-					const url = this.getNodeParameter("url", 0) as string;
-					const width = this.getNodeParameter("width", 0) as number;
-					const height = this.getNodeParameter("height", 0) as number;
-					responseData = await getAvatarsBrowserFavicon(appwriteClient, url, width, height);
+				if (operation === "getAvatarsBrowserFavicon") {
+					const browser = this.getNodeParameter("browser", 0) as string;
+					const additionalFields = this.getNodeParameter("additionalFields", 0) as any;
+					const width = additionalFields?.width || 100;
+					const height = additionalFields?.height || 100;
+					responseData = await getAvatarsBrowserFavicon(appwriteClient, browser as Browser, width, height);
 					returnData.push({ data: responseData });
-				} else if (operation === "getCreditCardIcon") {
+				} else if (operation === "getAvatarsCreditCardIcon") {
 					const code = this.getNodeParameter("code", 0) as string;
-					const width = this.getNodeParameter("width", 0) as number;
-					const height = this.getNodeParameter("height", 0) as number;
-					responseData = await getAvatarsCreditCardIcon(appwriteClient, code, width, height);
+					const additionalFields = this.getNodeParameter("additionalFields", 0) as any;
+					const width = additionalFields?.width || 100;
+					const height = additionalFields?.height || 100;
+					responseData = await getAvatarsCreditCardIcon(appwriteClient, code as CreditCard, width, height);
 					returnData.push({ data: responseData });
-				} else if (operation === "getFavicon") {
+				} else if (operation === "getAvatarsFavicon") {
 					const url = this.getNodeParameter("url", 0) as string;
 					responseData = await getAvatarsFavicon(appwriteClient, url);
 					returnData.push({ data: responseData });
-				} else if (operation === "getFlag") {
+				} else if (operation === "getAvatarsFlag") {
 					const code = this.getNodeParameter("code", 0) as string;
-					const width = this.getNodeParameter("width", 0) as number;
-					const height = this.getNodeParameter("height", 0) as number;
-					responseData = await getAvatarsFlag(appwriteClient, code, width, height);
+					const additionalFields = this.getNodeParameter("additionalFields", 0) as any;
+					const width = additionalFields?.width || 100;
+					const height = additionalFields?.height || 100;
+					responseData = await getAvatarsFlag(appwriteClient, code as Flag, width, height);
 					returnData.push({ data: responseData });
-				} else if (operation === "getImage") {
+				} else if (operation === "getAvatarsImage") {
 					const url = this.getNodeParameter("url", 0) as string;
-					const width = this.getNodeParameter("width", 0) as number;
-					const height = this.getNodeParameter("height", 0) as number;
+					const additionalFields = this.getNodeParameter("additionalFields", 0) as any;
+					const width = additionalFields?.width || 100;
+					const height = additionalFields?.height || 100;
 					responseData = await getAvatarsImage(appwriteClient, url, width, height);
 					returnData.push({ data: responseData });
-				} else if (operation === "getInitials") {
+				} else if (operation === "getAvatarsInitials") {
 					const name = this.getNodeParameter("name", 0) as string;
-					const width = this.getNodeParameter("width", 0) as number;
-					const height = this.getNodeParameter("height", 0) as number;
-					const background = this.getNodeParameter("background", 0) as string;
+					const additionalFields = this.getNodeParameter("additionalFields", 0) as any;
+					const width = additionalFields?.width || 100;
+					const height = additionalFields?.height || 100;
+					const background = additionalFields?.background || "";
 					responseData = await getAvatarsInitials(appwriteClient, name, width, height, background);
 					returnData.push({ data: responseData });
-				} else if (operation === "getQR") {
+				} else if (operation === "getAvatarsQR") {
 					const text = this.getNodeParameter("text", 0) as string;
-					const size = this.getNodeParameter("size", 0) as number;
-					const margin = this.getNodeParameter("margin", 0) as number;
-					const download = this.getNodeParameter("download", 0) as boolean;
+					const additionalFields = this.getNodeParameter("additionalFields", 0) as any;
+					const size = additionalFields?.size || 400;
+					const margin = additionalFields?.margin || 1;
+					const download = additionalFields?.download || false;
 					responseData = await getAvatarsQR(appwriteClient, text, size, margin, download);
 					returnData.push({ data: responseData });
 				}
@@ -922,33 +1117,61 @@ export class ZAppwrite implements INodeType {
 				if (operation === "getUserLocale") {
 					responseData = await getLocaleUserLocale(appwriteClient);
 					returnData.push(responseData);
-				} else if (operation === "getCodes") {
+				} else if (operation === "listLocaleCodes") {
 					responseData = await getLocaleCodes(appwriteClient);
 					returnData.push(responseData);
-				} else if (operation === "getContinents") {
+				} else if (operation === "listContinents") {
 					responseData = await getLocaleContinents(appwriteClient);
 					returnData.push(responseData);
-				} else if (operation === "getCountries") {
+				} else if (operation === "listCountries") {
 					responseData = await getLocaleCountries(appwriteClient);
 					returnData.push(responseData);
-				} else if (operation === "getEUCountries") {
+				} else if (operation === "listCountriesEU") {
 					responseData = await getLocaleEUCountries(appwriteClient);
 					returnData.push(responseData);
-				} else if (operation === "getCountriesPhones") {
+				} else if (operation === "listCountriesPhones") {
 					responseData = await getLocaleCountriesPhones(appwriteClient);
 					returnData.push(responseData);
-				} else if (operation === "getCurrencies") {
+				} else if (operation === "listCurrencies") {
 					responseData = await getLocaleCurrencies(appwriteClient);
 					returnData.push(responseData);
-				} else if (operation === "getLanguages") {
+				} else if (operation === "listLanguages") {
 					responseData = await getLocaleLanguages(appwriteClient);
 					returnData.push(responseData);
 				}
 			} else if (resource === "tokens") {
 				if (operation === "createFileToken") {
+					const bucketId = this.getNodeParameter("bucketId", 0) as string;
 					const fileId = this.getNodeParameter("fileId", 0) as string;
-					const purpose = this.getNodeParameter("purpose", 0) as string;
-					responseData = await createFileToken(appwriteClient, fileId, purpose);
+					const expire = this.getNodeParameter("expire", 0) as string;
+					responseData = await createFileToken(
+						appwriteClient, 
+						bucketId, 
+						fileId, 
+						expire || undefined
+					);
+					returnData.push(responseData);
+				} else if (operation === "deleteToken") {
+					const tokenId = this.getNodeParameter("tokenId", 0) as string;
+					responseData = await deleteToken(appwriteClient, tokenId);
+					returnData.push({ success: { message: "Token deleted successfully" } });
+				} else if (operation === "getToken") {
+					const tokenId = this.getNodeParameter("tokenId", 0) as string;
+					responseData = await getToken(appwriteClient, tokenId);
+					returnData.push(responseData);
+				} else if (operation === "listTokens") {
+					const bucketId = this.getNodeParameter("bucketId", 0) as string;
+					const fileId = this.getNodeParameter("fileId", 0) as string;
+					responseData = await listTokens(appwriteClient, bucketId, fileId);
+					returnData.push(responseData);
+				} else if (operation === "updateToken") {
+					const tokenId = this.getNodeParameter("tokenId", 0) as string;
+					const expire = this.getNodeParameter("expire", 0) as string;
+					responseData = await updateToken(
+						appwriteClient, 
+						tokenId, 
+						expire || undefined
+					);
 					returnData.push(responseData);
 				}
 			} else {

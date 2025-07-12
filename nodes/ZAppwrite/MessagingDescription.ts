@@ -7,7 +7,13 @@ export const messagingOperations: INodeProperties[] = [
 		noDataExpression: true,
 		type: "options",
 		options: [
-			// Message Operations
+			{
+				name: "Create APNS Provider",
+				displayName: "Create APNS Provider",
+				value: "createApnsProvider",
+				action: "Create APNS provider",
+				description: "Create a new Apple Push Notification service provider",
+			},
 			{
 				name: "Create Email",
 				displayName: "Create Email",
@@ -15,7 +21,27 @@ export const messagingOperations: INodeProperties[] = [
 				action: "Create email message",
 				description: "Create a new email message",
 			},
-			// Provider Operations
+			{
+				name: "Create FCM Provider",
+				displayName: "Create FCM Provider",
+				value: "createFcmProvider",
+				action: "Create FCM provider",
+				description: "Create a new Firebase Cloud Messaging provider",
+			},
+			{
+				name: "Create Mailgun Provider",
+				displayName: "Create Mailgun Provider",
+				value: "createMailgunProvider",
+				action: 'Create mailgun provider',
+				description: "Create a new Mailgun provider",
+			},
+			{
+				name: "Create MSG91 Provider",
+				displayName: "Create MSG91 Provider",
+				value: "createMsg91Provider",
+				action: "Create MSG91 provider",
+				description: "Create a new MSG91 provider",
+			},
 			{
 				name: "Create Provider",
 				displayName: "Create Provider",
@@ -31,13 +57,26 @@ export const messagingOperations: INodeProperties[] = [
 				description: "Create a new push notification",
 			},
 			{
+				name: "Create Sendgrid Provider",
+				displayName: "Create Sendgrid Provider",
+				value: "createSendgridProvider",
+				action: 'Create sendgrid provider',
+				description: "Create a new Sendgrid provider",
+			},
+			{
 				name: "Create SMS",
 				displayName: "Create SMS",
 				value: "createSms",
 				action: "Create SMS message",
 				description: "Create a new SMS message",
 			},
-			// Subscriber Operations
+			{
+				name: "Create SMTP Provider",
+				displayName: "Create SMTP Provider",
+				value: "createSmtpProvider",
+				action: "Create SMTP provider",
+				description: "Create a new SMTP provider",
+			},
 			{
 				name: "Create Subscriber",
 				displayName: "Create Subscriber",
@@ -45,7 +84,20 @@ export const messagingOperations: INodeProperties[] = [
 				action: "Create subscriber",
 				description: "Create a new subscriber",
 			},
-			// Topic Operations
+			{
+				name: "Create Telesign Provider",
+				displayName: "Create Telesign Provider",
+				value: "createTelesignProvider",
+				action: 'Create telesign provider',
+				description: "Create a new Telesign provider",
+			},
+			{
+				name: "Create Textmagic Provider",
+				displayName: "Create Textmagic Provider",
+				value: "createTextmagicProvider",
+				action: 'Create textmagic provider',
+				description: "Create a new Textmagic provider",
+			},
 			{
 				name: "Create Topic",
 				displayName: "Create Topic",
@@ -54,11 +106,18 @@ export const messagingOperations: INodeProperties[] = [
 				description: "Create a new topic",
 			},
 			{
-				name: "Delete Message",
-				displayName: "Delete Message",
-				value: "deleteMessage",
-				action: "Delete message",
-				description: "Delete a message by its unique ID",
+				name: "Create Twilio Provider",
+				displayName: "Create Twilio Provider",
+				value: "createTwilioProvider",
+				action: 'Create twilio provider',
+				description: "Create a new Twilio provider",
+			},
+			{
+				name: "Create Vonage Provider",
+				displayName: "Create Vonage Provider",
+				value: "createVonageProvider",
+				action: 'Create vonage provider',
+				description: "Create a new Vonage provider",
 			},
 			{
 				name: "Delete Provider",
@@ -173,11 +232,39 @@ export const messagingOperations: INodeProperties[] = [
 				description: "Get a list of all topics",
 			},
 			{
+				name: "Update APNS Provider",
+				displayName: "Update APNS Provider",
+				value: "updateApnsProvider",
+				action: "Update APNS provider",
+				description: "Update an Apple Push Notification service provider",
+			},
+			{
 				name: "Update Email",
 				displayName: "Update Email",
 				value: "updateEmail",
 				action: "Update email message",
 				description: "Update an email message",
+			},
+			{
+				name: "Update FCM Provider",
+				displayName: "Update FCM Provider",
+				value: "updateFcmProvider",
+				action: "Update FCM provider",
+				description: "Update a Firebase Cloud Messaging provider",
+			},
+			{
+				name: "Update Mailgun Provider",
+				displayName: "Update Mailgun Provider",
+				value: "updateMailgunProvider",
+				action: 'Update mailgun provider',
+				description: "Update a Mailgun provider",
+			},
+			{
+				name: "Update MSG91 Provider",
+				displayName: "Update MSG91 Provider",
+				value: "updateMsg91Provider",
+				action: "Update MSG91 provider",
+				description: "Update a MSG91 provider",
 			},
 			{
 				name: "Update Provider",
@@ -194,6 +281,13 @@ export const messagingOperations: INodeProperties[] = [
 				description: "Update a push notification",
 			},
 			{
+				name: "Update Sendgrid Provider",
+				displayName: "Update Sendgrid Provider",
+				value: "updateSendgridProvider",
+				action: 'Update sendgrid provider',
+				description: "Update a Sendgrid provider",
+			},
+			{
 				name: "Update SMS",
 				displayName: "Update SMS",
 				value: "updateSms",
@@ -201,11 +295,46 @@ export const messagingOperations: INodeProperties[] = [
 				description: "Update an SMS message",
 			},
 			{
+				name: "Update SMTP Provider",
+				displayName: "Update SMTP Provider",
+				value: "updateSmtpProvider",
+				action: "Update SMTP provider",
+				description: "Update a SMTP provider",
+			},
+			{
+				name: "Update Telesign Provider",
+				displayName: "Update Telesign Provider",
+				value: "updateTelesignProvider",
+				action: 'Update telesign provider',
+				description: "Update a Telesign provider",
+			},
+			{
+				name: "Update Textmagic Provider",
+				displayName: "Update Textmagic Provider",
+				value: "updateTextmagicProvider",
+				action: 'Update textmagic provider',
+				description: "Update a Textmagic provider",
+			},
+			{
 				name: "Update Topic",
 				displayName: "Update Topic",
 				value: "updateTopic",
 				action: "Update topic",
 				description: "Update a topic by its unique ID",
+			},
+			{
+				name: "Update Twilio Provider",
+				displayName: "Update Twilio Provider",
+				value: "updateTwilioProvider",
+				action: 'Update twilio provider',
+				description: "Update a Twilio provider",
+			},
+			{
+				name: "Update Vonage Provider",
+				displayName: "Update Vonage Provider",
+				value: "updateVonageProvider",
+				action: 'Update vonage provider',
+				description: "Update a Vonage provider",
 			},
 		],
 		default: "listProviders",
@@ -289,8 +418,28 @@ export const messagingFields: INodeProperties[] = [
 				resource: ["messaging"],
 				operation: [
 					"createProvider",
+					"createApnsProvider",
+					"createFcmProvider", 
+					"createMailgunProvider",
+					"createMsg91Provider",
+					"createSendgridProvider",
+					"createSmtpProvider",
+					"createTelesignProvider",
+					"createTextmagicProvider",
+					"createTwilioProvider",
+					"createVonageProvider",
 					"getProvider",
 					"updateProvider",
+					"updateApnsProvider",
+					"updateFcmProvider",
+					"updateMailgunProvider",
+					"updateMsg91Provider",
+					"updateSendgridProvider",
+					"updateSmtpProvider",
+					"updateTelesignProvider",
+					"updateTextmagicProvider",
+					"updateTwilioProvider",
+					"updateVonageProvider",
 					"deleteProvider",
 					"listProviderLogs",
 				],
@@ -308,7 +457,30 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: [
+					"createProvider",
+					"createApnsProvider",
+					"createFcmProvider", 
+					"createMailgunProvider",
+					"createMsg91Provider",
+					"createSendgridProvider",
+					"createSmtpProvider",
+					"createTelesignProvider",
+					"createTextmagicProvider",
+					"createTwilioProvider",
+					"createVonageProvider",
+					"updateProvider",
+					"updateApnsProvider",
+					"updateFcmProvider",
+					"updateMailgunProvider",
+					"updateMsg91Provider",
+					"updateSendgridProvider",
+					"updateSmtpProvider",
+					"updateTelesignProvider",
+					"updateTextmagicProvider",
+					"updateTwilioProvider",
+					"updateVonageProvider",
+				],
 			},
 		},
 	},
@@ -324,7 +496,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createSmtpProvider", "updateSmtpProvider"],
 				providerType: ["smtp"],
 			},
 		},
@@ -339,7 +511,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createSmtpProvider", "updateSmtpProvider"],
 				providerType: ["smtp"],
 			},
 		},
@@ -354,7 +526,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createSmtpProvider", "updateSmtpProvider"],
 				providerType: ["smtp"],
 			},
 		},
@@ -370,7 +542,66 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createSmtpProvider", "updateSmtpProvider"],
+				providerType: ["smtp"],
+			},
+		},
+	},
+
+	{
+		displayName: "Encryption",
+		name: "encryption",
+		type: "options",
+		options: [
+			{
+				name: "None",
+				value: "none",
+			},
+			{
+				name: "SSL",
+				value: "ssl",
+			},
+			{
+				name: "TLS",
+				value: "tls",
+			},
+		],
+		default: "none",
+		description: "SMTP encryption type",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createProvider", "updateProvider", "createSmtpProvider", "updateSmtpProvider"],
+				providerType: ["smtp"],
+			},
+		},
+	},
+
+	{
+		displayName: "Auto TLS",
+		name: "autoTLS",
+		type: "boolean",
+		default: false,
+		description: "Whether to enable auto TLS",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createProvider", "updateProvider", "createSmtpProvider", "updateSmtpProvider"],
+				providerType: ["smtp"],
+			},
+		},
+	},
+
+	{
+		displayName: "Mailer",
+		name: "mailer",
+		type: "string",
+		default: "",
+		description: "SMTP mailer name",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createProvider", "updateProvider", "createSmtpProvider", "updateSmtpProvider"],
 				providerType: ["smtp"],
 			},
 		},
@@ -387,7 +618,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createMailgunProvider", "updateMailgunProvider"],
 				providerType: ["mailgun"],
 			},
 		},
@@ -402,13 +633,103 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createMailgunProvider", "updateMailgunProvider"],
+				providerType: ["mailgun"],
+			},
+		},
+	},
+
+	{
+		displayName: "EU Region",
+		name: "isEuRegion",
+		type: "boolean",
+		default: false,
+		description: "Whether to use Mailgun EU region",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createProvider", "updateProvider", "createMailgunProvider", "updateMailgunProvider"],
+				providerType: ["mailgun"],
+			},
+		},
+	},
+
+	{
+		displayName: "From Name",
+		name: "fromName",
+		type: "string",
+		default: "",
+		description: "Sender name",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createProvider", "updateProvider", "createMailgunProvider", "updateMailgunProvider"],
+				providerType: ["mailgun"],
+			},
+		},
+	},
+
+	{
+		displayName: "From Email",
+		name: "fromEmail",
+		type: "string",
+		default: "",
+		description: "Sender email address",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createProvider", "updateProvider", "createMailgunProvider", "updateMailgunProvider"],
+				providerType: ["mailgun"],
+			},
+		},
+	},
+
+	{
+		displayName: "Reply To Name",
+		name: "replyToName",
+		type: "string",
+		default: "",
+		description: "Reply-to name",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createProvider", "updateProvider", "createMailgunProvider", "updateMailgunProvider"],
+				providerType: ["mailgun"],
+			},
+		},
+	},
+
+	{
+		displayName: "Reply To Email",
+		name: "replyToEmail",
+		type: "string",
+		default: "",
+		description: "Reply-to email address",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createProvider", "updateProvider", "createMailgunProvider", "updateMailgunProvider"],
 				providerType: ["mailgun"],
 			},
 		},
 	},
 
 	// MSG91 Provider Fields
+	{
+		displayName: "Template ID",
+		name: "templateId",
+		type: "string",
+		default: "",
+		description: "MSG91 Template ID",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createProvider", "updateProvider", "createMsg91Provider", "updateMsg91Provider"],
+				providerType: ["msg91"],
+			},
+		},
+	},
+
 	{
 		displayName: "Sender ID",
 		name: "senderId",
@@ -418,7 +739,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createMsg91Provider", "updateMsg91Provider"],
 				providerType: ["msg91"],
 			},
 		},
@@ -434,7 +755,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createMsg91Provider", "updateMsg91Provider"],
 				providerType: ["msg91"],
 			},
 		},
@@ -451,7 +772,67 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createSendgridProvider", "updateSendgridProvider"],
+				providerType: ["sendgrid"],
+			},
+		},
+	},
+
+	{
+		displayName: "From Name",
+		name: "fromName",
+		type: "string",
+		default: "",
+		description: "Sender name",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createProvider", "updateProvider", "createSendgridProvider", "updateSendgridProvider"],
+				providerType: ["sendgrid"],
+			},
+		},
+	},
+
+	{
+		displayName: "From Email",
+		name: "fromEmail",
+		type: "string",
+		default: "",
+		description: "Sender email address",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createProvider", "updateProvider", "createSendgridProvider", "updateSendgridProvider"],
+				providerType: ["sendgrid"],
+			},
+		},
+	},
+
+	{
+		displayName: "Reply To Name",
+		name: "replyToName",
+		type: "string",
+		default: "",
+		description: "Reply-to name",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createProvider", "updateProvider", "createSendgridProvider", "updateSendgridProvider"],
+				providerType: ["sendgrid"],
+			},
+		},
+	},
+
+	{
+		displayName: "Reply To Email",
+		name: "replyToEmail",
+		type: "string",
+		default: "",
+		description: "Reply-to email address",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createProvider", "updateProvider", "createSendgridProvider", "updateSendgridProvider"],
 				providerType: ["sendgrid"],
 			},
 		},
@@ -467,7 +848,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createFcmProvider", "updateFcmProvider"],
 				providerType: ["fcm"],
 			},
 		},
@@ -484,7 +865,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createApnsProvider", "updateApnsProvider"],
 				providerType: ["apns"],
 			},
 		},
@@ -499,7 +880,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createApnsProvider", "updateApnsProvider"],
 				providerType: ["apns"],
 			},
 		},
@@ -514,7 +895,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createApnsProvider", "updateApnsProvider"],
 				providerType: ["apns"],
 			},
 		},
@@ -529,7 +910,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createApnsProvider", "updateApnsProvider"],
 				providerType: ["apns"],
 			},
 		},
@@ -544,7 +925,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createApnsProvider", "updateApnsProvider"],
 				providerType: ["apns"],
 			},
 		},
@@ -575,7 +956,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createTelesignProvider", "updateTelesignProvider"],
 				providerType: ["telesign"],
 			},
 		},
@@ -591,7 +972,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createTelesignProvider", "updateTelesignProvider"],
 				providerType: ["telesign"],
 			},
 		},
@@ -622,7 +1003,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createTextmagicProvider", "updateTextmagicProvider"],
 				providerType: ["textmagic"],
 			},
 		},
@@ -638,7 +1019,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createTextmagicProvider", "updateTextmagicProvider"],
 				providerType: ["textmagic"],
 			},
 		},
@@ -669,7 +1050,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createTwilioProvider", "updateTwilioProvider"],
 				providerType: ["twilio"],
 			},
 		},
@@ -685,7 +1066,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createTwilioProvider", "updateTwilioProvider"],
 				providerType: ["twilio"],
 			},
 		},
@@ -717,7 +1098,7 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createVonageProvider", "updateVonageProvider"],
 				providerType: ["vonage"],
 			},
 		},
@@ -733,8 +1114,663 @@ export const messagingFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ["messaging"],
-				operation: ["createProvider", "updateProvider"],
+				operation: ["createProvider", "updateProvider", "createVonageProvider", "updateVonageProvider"],
 				providerType: ["vonage"],
+			},
+		},
+	},
+
+	// Provider-specific fields for direct operations (without providerType selector)
+	
+	// APNS Provider fields for specific operations
+	{
+		displayName: "Auth Key",
+		name: "authKeyDirect",
+		type: "string",
+		typeOptions: { password: true },
+		default: "",
+		description: "APNS Auth Key",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createApnsProvider", "updateApnsProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Auth Key ID",
+		name: "authKeyIdDirect",
+		type: "string",
+		default: "",
+		description: "APNS Auth Key ID",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createApnsProvider", "updateApnsProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Team ID",
+		name: "teamIdDirect",
+		type: "string",
+		default: "",
+		description: "APNS Team ID",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createApnsProvider", "updateApnsProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Bundle ID",
+		name: "bundleIdDirect",
+		type: "string",
+		default: "",
+		description: "APNS Bundle ID",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createApnsProvider", "updateApnsProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Sandbox",
+		name: "sandboxDirect",
+		type: "boolean",
+		default: false,
+		description: "Whether to use APNS sandbox environment",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createApnsProvider", "updateApnsProvider"],
+			},
+		},
+	},
+
+	// FCM Provider fields for specific operations
+	{
+		displayName: "Service Account JSON",
+		name: "serviceAccountJSONDirect",
+		type: "json",
+		default: "{}",
+		description: "Firebase service account JSON",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createFcmProvider", "updateFcmProvider"],
+			},
+		},
+	},
+
+	// SMTP Provider fields for specific operations
+	{
+		displayName: "Host",
+		name: "hostDirect",
+		type: "string",
+		required: true,
+		default: "",
+		description: "SMTP server host",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createSmtpProvider", "updateSmtpProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Port",
+		name: "portDirect",
+		type: "number",
+		default: 587,
+		description: "SMTP server port",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createSmtpProvider", "updateSmtpProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Username",
+		name: "usernameDirect",
+		type: "string",
+		default: "",
+		description: "SMTP username",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createSmtpProvider", "updateSmtpProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Password",
+		name: "passwordDirect",
+		type: "string",
+		typeOptions: { password: true },
+		default: "",
+		description: "SMTP password",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createSmtpProvider", "updateSmtpProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Encryption",
+		name: "encryptionDirect",
+		type: "options",
+		options: [
+			{
+				name: "None",
+				value: "none",
+			},
+			{
+				name: "SSL",
+				value: "ssl",
+			},
+			{
+				name: "TLS",
+				value: "tls",
+			},
+		],
+		default: "none",
+		description: "SMTP encryption type",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createSmtpProvider", "updateSmtpProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Auto TLS",
+		name: "autoTLSDirect",
+		type: "boolean",
+		default: false,
+		description: "Whether to enable auto TLS",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createSmtpProvider", "updateSmtpProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Mailer",
+		name: "mailerDirect",
+		type: "string",
+		default: "",
+		description: "SMTP mailer name",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createSmtpProvider", "updateSmtpProvider"],
+			},
+		},
+	},
+	{
+		displayName: "From Name",
+		name: "fromNameDirect",
+		type: "string",
+		default: "",
+		description: "Sender name",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createSmtpProvider", "updateSmtpProvider"],
+			},
+		},
+	},
+	{
+		displayName: "From Email",
+		name: "fromEmailDirect",
+		type: "string",
+		default: "",
+		description: "Sender email address",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createSmtpProvider", "updateSmtpProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Reply To Name",
+		name: "replyToNameDirect",
+		type: "string",
+		default: "",
+		description: "Reply-to name",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createSmtpProvider", "updateSmtpProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Reply To Email",
+		name: "replyToEmailDirect",
+		type: "string",
+		default: "",
+		description: "Reply-to email address",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createSmtpProvider", "updateSmtpProvider"],
+			},
+		},
+	},
+
+	// Mailgun Provider fields for specific operations
+	{
+		displayName: "API Key",
+		name: "apiKeyDirectMailgun",
+		type: "string",
+		typeOptions: { password: true },
+		default: "",
+		description: "Mailgun API Key",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createMailgunProvider", "updateMailgunProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Domain",
+		name: "domainDirect",
+		type: "string",
+		default: "",
+		description: "Mailgun domain",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createMailgunProvider", "updateMailgunProvider"],
+			},
+		},
+	},
+	{
+		displayName: "EU Region",
+		name: "isEuRegionDirect",
+		type: "boolean",
+		default: false,
+		description: "Whether to use Mailgun EU region",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createMailgunProvider", "updateMailgunProvider"],
+			},
+		},
+	},
+	{
+		displayName: "From Name",
+		name: "fromNameDirectMailgun",
+		type: "string",
+		default: "",
+		description: "Sender name",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createMailgunProvider", "updateMailgunProvider"],
+			},
+		},
+	},
+	{
+		displayName: "From Email",
+		name: "fromEmailDirectMailgun",
+		type: "string",
+		default: "",
+		description: "Sender email address",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createMailgunProvider", "updateMailgunProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Reply To Name",
+		name: "replyToNameDirectMailgun",
+		type: "string",
+		default: "",
+		description: "Reply-to name",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createMailgunProvider", "updateMailgunProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Reply To Email",
+		name: "replyToEmailDirectMailgun",
+		type: "string",
+		default: "",
+		description: "Reply-to email address",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createMailgunProvider", "updateMailgunProvider"],
+			},
+		},
+	},
+
+	// Sendgrid Provider fields for specific operations
+	{
+		displayName: "API Key",
+		name: "apiKeyDirectSendgrid",
+		type: "string",
+		typeOptions: { password: true },
+		default: "",
+		description: "Sendgrid API Key",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createSendgridProvider", "updateSendgridProvider"],
+			},
+		},
+	},
+	{
+		displayName: "From Name",
+		name: "fromNameDirectSendgrid",
+		type: "string",
+		default: "",
+		description: "Sender name",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createSendgridProvider", "updateSendgridProvider"],
+			},
+		},
+	},
+	{
+		displayName: "From Email",
+		name: "fromEmailDirectSendgrid",
+		type: "string",
+		default: "",
+		description: "Sender email address",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createSendgridProvider", "updateSendgridProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Reply To Name",
+		name: "replyToNameDirectSendgrid",
+		type: "string",
+		default: "",
+		description: "Reply-to name",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createSendgridProvider", "updateSendgridProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Reply To Email",
+		name: "replyToEmailDirectSendgrid",
+		type: "string",
+		default: "",
+		description: "Reply-to email address",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createSendgridProvider", "updateSendgridProvider"],
+			},
+		},
+	},
+
+	// MSG91 Provider fields for specific operations
+	{
+		displayName: "Template ID",
+		name: "templateIdDirect",
+		type: "string",
+		default: "",
+		description: "MSG91 Template ID",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createMsg91Provider", "updateMsg91Provider"],
+			},
+		},
+	},
+	{
+		displayName: "Sender ID",
+		name: "senderIdDirect",
+		type: "string",
+		default: "",
+		description: "MSG91 Sender ID",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createMsg91Provider", "updateMsg91Provider"],
+			},
+		},
+	},
+	{
+		displayName: "Auth Key",
+		name: "authKeyDirectMsg91",
+		type: "string",
+		typeOptions: { password: true },
+		default: "",
+		description: "MSG91 Auth Key",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createMsg91Provider", "updateMsg91Provider"],
+			},
+		},
+	},
+
+	// Telesign Provider fields for specific operations
+	{
+		displayName: "From",
+		name: "fromDirectTelesign",
+		type: "string",
+		default: "",
+		description: "Phone number to send from",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createTelesignProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Customer ID",
+		name: "customerIdDirect",
+		type: "string",
+		default: "",
+		description: "Telesign Customer ID",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createTelesignProvider", "updateTelesignProvider"],
+			},
+		},
+	},
+	{
+		displayName: "API Key",
+		name: "apiKeyDirectTelesign",
+		type: "string",
+		typeOptions: { password: true },
+		default: "",
+		description: "Telesign API Key",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createTelesignProvider", "updateTelesignProvider"],
+			},
+		},
+	},
+
+	// Textmagic Provider fields for specific operations
+	{
+		displayName: "From",
+		name: "fromDirectTextmagic",
+		type: "string",
+		default: "",
+		description: "Phone number to send from",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createTextmagicProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Username",
+		name: "usernameDirectTextmagic",
+		type: "string",
+		default: "",
+		description: "Textmagic username",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createTextmagicProvider", "updateTextmagicProvider"],
+			},
+		},
+	},
+	{
+		displayName: "API Key",
+		name: "apiKeyDirectTextmagic",
+		type: "string",
+		typeOptions: { password: true },
+		default: "",
+		description: "Textmagic API Key",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createTextmagicProvider", "updateTextmagicProvider"],
+			},
+		},
+	},
+
+	// Twilio Provider fields for specific operations
+	{
+		displayName: "From",
+		name: "fromDirectTwilio",
+		type: "string",
+		default: "",
+		description: "Phone number to send from",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createTwilioProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Account SID",
+		name: "accountSidDirect",
+		type: "string",
+		default: "",
+		description: "Twilio Account SID",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createTwilioProvider", "updateTwilioProvider"],
+			},
+		},
+	},
+	{
+		displayName: "Auth Token",
+		name: "authTokenDirect",
+		type: "string",
+		typeOptions: { password: true },
+		default: "",
+		description: "Twilio Auth Token",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createTwilioProvider", "updateTwilioProvider"],
+			},
+		},
+	},
+
+	// Vonage Provider fields for specific operations
+	{
+		displayName: "From",
+		name: "fromDirectVonage",
+		type: "string",
+		default: "",
+		description: "Phone number to send from",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createVonageProvider"],
+			},
+		},
+	},
+	{
+		displayName: "API Key",
+		name: "apiKeyDirectVonage",
+		type: "string",
+		typeOptions: { password: true },
+		default: "",
+		description: "Vonage API Key",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createVonageProvider", "updateVonageProvider"],
+			},
+		},
+	},
+	{
+		displayName: "API Secret",
+		name: "apiSecretDirect",
+		type: "string",
+		typeOptions: { password: true },
+		default: "",
+		description: "Vonage API Secret",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: ["createVonageProvider", "updateVonageProvider"],
+			},
+		},
+	},
+
+	// Common provider fields for specific operations
+	{
+		displayName: "Enabled",
+		name: "enabledDirect",
+		type: "boolean",
+		default: true,
+		description: "Whether provider is enabled",
+		displayOptions: {
+			show: {
+				resource: ["messaging"],
+				operation: [
+					"createApnsProvider",
+					"createFcmProvider", 
+					"createMailgunProvider",
+					"createMsg91Provider",
+					"createSendgridProvider",
+					"createSmtpProvider",
+					"createTelesignProvider",
+					"createTextmagicProvider",
+					"createTwilioProvider",
+					"createVonageProvider",
+					"updateApnsProvider",
+					"updateFcmProvider",
+					"updateMailgunProvider",
+					"updateMsg91Provider",
+					"updateSendgridProvider",
+					"updateSmtpProvider",
+					"updateTelesignProvider",
+					"updateTextmagicProvider",
+					"updateTwilioProvider",
+					"updateVonageProvider",
+				],
 			},
 		},
 	},
@@ -837,7 +1873,6 @@ export const messagingFields: INodeProperties[] = [
 					"updateEmail",
 					"updatePush",
 					"updateSms",
-					"deleteMessage",
 					"listMessageLogs",
 					"listTargets",
 				],
