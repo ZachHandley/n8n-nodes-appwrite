@@ -80,4 +80,80 @@ export const functionFields: INodeProperties[] = [
 		},
 		default: '',
 	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'function',
+				],
+				operation: [
+					'executeFunction',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Async',
+				name: 'async',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute function asynchronously',
+			},
+			{
+				displayName: 'Headers',
+				name: 'headers',
+				type: 'json',
+				default: {},
+				description: 'Additional headers to send',
+			},
+			{
+				displayName: 'Method',
+				name: 'method',
+				type: 'options',
+				default: 'POST',
+				description: 'HTTP method for execution',
+				options: [
+					{
+						name: 'DELETE',
+						value: 'DELETE',
+					},
+					{
+						name: 'GET',
+						value: 'GET',
+					},
+					{
+						name: 'PATCH',
+						value: 'PATCH',
+					},
+					{
+						name: 'POST',
+						value: 'POST',
+					},
+					{
+						name: 'PUT',
+						value: 'PUT',
+					},
+				],
+			},
+			{
+				displayName: 'Scheduled At',
+				name: 'scheduledAt',
+				type: 'string',
+				default: '',
+				description: 'Schedule execution for a specific time in ISO 8601 format',
+			},
+			{
+				displayName: 'XPath',
+				name: 'xpath',
+				type: 'string',
+				default: '',
+				description: 'Path to extract from response',
+			},
+		],
+	},
 ];

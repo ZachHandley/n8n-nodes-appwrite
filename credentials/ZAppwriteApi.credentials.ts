@@ -4,8 +4,8 @@ import {
 	INodeProperties,
 } from 'n8n-workflow';
 
-export class NAppwriteApi implements ICredentialType {
-	name = 'nAppwriteApi';
+export class ZAppwriteApi implements ICredentialType {
+	name = 'zAppwriteApi';
 	displayName = 'Appwrite API';
 	documentationUrl = 'https://appwrite.io/';
 	properties: INodeProperties[] = [

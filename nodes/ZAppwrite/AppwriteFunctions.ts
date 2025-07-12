@@ -8,6 +8,9 @@ import {
 	Users,
 	ID,
 	Compression,
+	Messaging,
+	Avatars,
+	Locale,
 } from "node-appwrite";
 
 export async function getAppwriteClient(
@@ -343,10 +346,23 @@ export async function listAppwriteFunctions(
 export async function runAppwriteFunction(
 	client: Client,
 	functionId: string,
-	data: any
+	data: any,
+	async?: boolean,
+	xpath?: string,
+	method?: string,
+	headers?: object,
+	scheduledAt?: string
 ): Promise<Models.Execution> {
 	const functions = new Functions(client);
-	return functions.createExecution(functionId, data);
+	return functions.createExecution(
+		functionId,
+		data,
+		async,
+		xpath,
+		method,
+		headers,
+		scheduledAt
+	);
 }
 
 export async function getAppwriteStorageFile(
@@ -611,3 +627,527 @@ export const convertStringToQuery = (
 			return "";
 	}
 };
+
+
+// MESSAGING FUNCTIONS
+export async function createMessagingProvider(
+	client: Client,
+	providerId: string,
+	name: string,
+	providerType: string,
+	config: object
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.createProvider(providerId, name, providerType, config);
+}
+
+export async function getMessagingProvider(
+	client: Client,
+	providerId: string
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.getProvider(providerId);
+}
+
+export async function listMessagingProviders(
+	client: Client,
+	queries?: string[]
+): Promise<Models.ProviderList> {
+	const messaging = new Messaging(client);
+	return messaging.listProviders(queries);
+}
+
+export async function updateMessagingProvider(
+	client: Client,
+	providerId: string,
+	name?: string,
+	enabled?: boolean,
+	config?: object
+): Promise<Models.Provider> {
+	const messaging = new Messaging(client);
+	return messaging.updateProvider(providerId, name, enabled, config);
+}
+
+export async function deleteMessagingProvider(
+	client: Client,
+	providerId: string
+): Promise<{}> {
+	const messaging = new Messaging(client);
+	return messaging.deleteProvider(providerId);
+}
+
+export async function listMessagingProviderLogs(
+	client: Client,
+	providerId: string,
+	queries?: string[]
+): Promise<Models.LogList> {
+	const messaging = new Messaging(client);
+	return messaging.listProviderLogs(providerId, queries);
+}
+
+export async function createMessagingTopic(
+	client: Client,
+	topicId: string,
+	name: string,
+	subscribe?: string[]
+): Promise<Models.Topic> {
+	const messaging = new Messaging(client);
+	return messaging.createTopic(topicId, name, subscribe);
+}
+
+export async function getMessagingTopic(
+	client: Client,
+	topicId: string
+): Promise<Models.Topic> {
+	const messaging = new Messaging(client);
+	return messaging.getTopic(topicId);
+}
+
+export async function listMessagingTopics(
+	client: Client,
+	queries?: string[]
+): Promise<Models.TopicList> {
+	const messaging = new Messaging(client);
+	return messaging.listTopics(queries);
+}
+
+export async function updateMessagingTopic(
+	client: Client,
+	topicId: string,
+	name?: string,
+	subscribe?: string[]
+): Promise<Models.Topic> {
+	const messaging = new Messaging(client);
+	return messaging.updateTopic(topicId, name, subscribe);
+}
+
+export async function deleteMessagingTopic(
+	client: Client,
+	topicId: string
+): Promise<{}> {
+	const messaging = new Messaging(client);
+	return messaging.deleteTopic(topicId);
+}
+
+export async function listMessagingTopicLogs(
+	client: Client,
+	topicId: string,
+	queries?: string[]
+): Promise<Models.LogList> {
+	const messaging = new Messaging(client);
+	return messaging.listTopicLogs(topicId, queries);
+}
+
+export async function createMessagingSubscriber(
+	client: Client,
+	topicId: string,
+	subscriberId: string,
+	targetId: string
+): Promise<Models.Subscriber> {
+	const messaging = new Messaging(client);
+	return messaging.createSubscriber(topicId, subscriberId, targetId);
+}
+
+export async function getMessagingSubscriber(
+	client: Client,
+	topicId: string,
+	subscriberId: string
+): Promise<Models.Subscriber> {
+	const messaging = new Messaging(client);
+	return messaging.getSubscriber(topicId, subscriberId);
+}
+
+export async function listMessagingSubscribers(
+	client: Client,
+	topicId: string,
+	queries?: string[]
+): Promise<Models.SubscriberList> {
+	const messaging = new Messaging(client);
+	return messaging.listSubscribers(topicId, queries);
+}
+
+export async function deleteMessagingSubscriber(
+	client: Client,
+	topicId: string,
+	subscriberId: string
+): Promise<{}> {
+	const messaging = new Messaging(client);
+	return messaging.deleteSubscriber(topicId, subscriberId);
+}
+
+export async function listMessagingSubscriberLogs(
+	client: Client,
+	topicId: string,
+	subscriberId: string,
+	queries?: string[]
+): Promise<Models.LogList> {
+	const messaging = new Messaging(client);
+	return messaging.listSubscriberLogs(topicId, subscriberId, queries);
+}
+
+export async function createMessagingEmail(
+	client: Client,
+	messageId: string,
+	subject: string,
+	content: string,
+	topics?: string[],
+	users?: string[],
+	targets?: string[],
+	cc?: string[],
+	bcc?: string[],
+	attachments?: string[],
+	draft?: boolean,
+	html?: boolean,
+	scheduledAt?: string
+): Promise<Models.Message> {
+	const messaging = new Messaging(client);
+	return messaging.createEmail(
+		messageId,
+		subject,
+		content,
+		topics,
+		users,
+		targets,
+		cc,
+		bcc,
+		attachments,
+		draft,
+		html,
+		scheduledAt
+	);
+}
+
+export async function createMessagingPush(
+	client: Client,
+	messageId: string,
+	title: string,
+	body: string,
+	topics?: string[],
+	users?: string[],
+	targets?: string[],
+	data?: object,
+	action?: string,
+	image?: string,
+	icon?: string,
+	sound?: string,
+	color?: string,
+	tag?: string,
+	badge?: number,
+	draft?: boolean,
+	scheduledAt?: string
+): Promise<Models.Message> {
+	const messaging = new Messaging(client);
+	return messaging.createPush(
+		messageId,
+		title,
+		body,
+		topics,
+		users,
+		targets,
+		data,
+		action,
+		image,
+		icon,
+		sound,
+		color,
+		tag,
+		badge,
+		draft,
+		scheduledAt
+	);
+}
+
+export async function createMessagingSms(
+	client: Client,
+	messageId: string,
+	content: string,
+	topics?: string[],
+	users?: string[],
+	targets?: string[],
+	draft?: boolean,
+	scheduledAt?: string
+): Promise<Models.Message> {
+	const messaging = new Messaging(client);
+	return messaging.createSms(
+		messageId,
+		content,
+		topics,
+		users,
+		targets,
+		draft,
+		scheduledAt
+	);
+}
+
+export async function getMessagingMessage(
+	client: Client,
+	messageId: string
+): Promise<Models.Message> {
+	const messaging = new Messaging(client);
+	return messaging.getMessage(messageId);
+}
+
+export async function listMessagingMessages(
+	client: Client,
+	queries?: string[]
+): Promise<Models.MessageList> {
+	const messaging = new Messaging(client);
+	return messaging.listMessages(queries);
+}
+
+export async function updateMessagingEmail(
+	client: Client,
+	messageId: string,
+	topics?: string[],
+	users?: string[],
+	targets?: string[],
+	subject?: string,
+	content?: string,
+	draft?: boolean,
+	html?: boolean,
+	cc?: string[],
+	bcc?: string[],
+	scheduledAt?: string
+): Promise<Models.Message> {
+	const messaging = new Messaging(client);
+	return messaging.updateEmail(
+		messageId,
+		topics,
+		users,
+		targets,
+		subject,
+		content,
+		draft,
+		html,
+		cc,
+		bcc,
+		scheduledAt
+	);
+}
+
+export async function updateMessagingPush(
+	client: Client,
+	messageId: string,
+	topics?: string[],
+	users?: string[],
+	targets?: string[],
+	title?: string,
+	body?: string,
+	data?: object,
+	action?: string,
+	image?: string,
+	icon?: string,
+	sound?: string,
+	color?: string,
+	tag?: string,
+	badge?: number,
+	draft?: boolean,
+	scheduledAt?: string
+): Promise<Models.Message> {
+	const messaging = new Messaging(client);
+	return messaging.updatePush(
+		messageId,
+		topics,
+		users,
+		targets,
+		title,
+		body,
+		data,
+		action,
+		image,
+		icon,
+		sound,
+		color,
+		tag,
+		badge,
+		draft,
+		scheduledAt
+	);
+}
+
+export async function updateMessagingSms(
+	client: Client,
+	messageId: string,
+	topics?: string[],
+	users?: string[],
+	targets?: string[],
+	content?: string,
+	draft?: boolean,
+	scheduledAt?: string
+): Promise<Models.Message> {
+	const messaging = new Messaging(client);
+	return messaging.updateSms(
+		messageId,
+		topics,
+		users,
+		targets,
+		content,
+		draft,
+		scheduledAt
+	);
+}
+
+export async function deleteMessagingMessage(
+	client: Client,
+	messageId: string
+): Promise<{}> {
+	const messaging = new Messaging(client);
+	return messaging.deleteMessage(messageId);
+}
+
+export async function listMessagingMessageLogs(
+	client: Client,
+	messageId: string,
+	queries?: string[]
+): Promise<Models.LogList> {
+	const messaging = new Messaging(client);
+	return messaging.listMessageLogs(messageId, queries);
+}
+
+export async function listMessagingTargets(
+	client: Client,
+	messageId: string,
+	queries?: string[]
+): Promise<Models.TargetList> {
+	const messaging = new Messaging(client);
+	return messaging.listTargets(messageId, queries);
+}
+
+// AVATARS FUNCTIONS
+export async function getAvatarsBrowserFavicon(
+	client: Client,
+	url: string,
+	width?: number,
+	height?: number
+): Promise<ArrayBuffer> {
+	const avatars = new Avatars(client);
+	return avatars.getBrowser(url, width, height);
+}
+
+export async function getAvatarsCreditCardIcon(
+	client: Client,
+	code: string,
+	width?: number,
+	height?: number
+): Promise<ArrayBuffer> {
+	const avatars = new Avatars(client);
+	return avatars.getCreditCard(code, width, height);
+}
+
+export async function getAvatarsFavicon(
+	client: Client,
+	url: string
+): Promise<ArrayBuffer> {
+	const avatars = new Avatars(client);
+	return avatars.getFavicon(url);
+}
+
+export async function getAvatarsFlag(
+	client: Client,
+	code: string,
+	width?: number,
+	height?: number
+): Promise<ArrayBuffer> {
+	const avatars = new Avatars(client);
+	return avatars.getFlag(code, width, height);
+}
+
+export async function getAvatarsImage(
+	client: Client,
+	url: string,
+	width?: number,
+	height?: number
+): Promise<ArrayBuffer> {
+	const avatars = new Avatars(client);
+	return avatars.getImage(url, width, height);
+}
+
+export async function getAvatarsInitials(
+	client: Client,
+	name?: string,
+	width?: number,
+	height?: number,
+	background?: string
+): Promise<ArrayBuffer> {
+	const avatars = new Avatars(client);
+	return avatars.getInitials(name, width, height, background);
+}
+
+export async function getAvatarsQR(
+	client: Client,
+	text: string,
+	size?: number,
+	margin?: number,
+	download?: boolean
+): Promise<ArrayBuffer> {
+	const avatars = new Avatars(client);
+	return avatars.getQR(text, size, margin, download);
+}
+
+// LOCALE FUNCTIONS
+export async function getLocaleUserLocale(
+	client: Client
+): Promise<Models.Locale> {
+	const locale = new Locale(client);
+	return locale.get();
+}
+
+export async function getLocaleCodes(
+	client: Client
+): Promise<Models.LocaleCodeList> {
+	const locale = new Locale(client);
+	return locale.listCodes();
+}
+
+export async function getLocaleContinents(
+	client: Client
+): Promise<Models.ContinentList> {
+	const locale = new Locale(client);
+	return locale.listContinents();
+}
+
+export async function getLocaleCountries(
+	client: Client
+): Promise<Models.CountryList> {
+	const locale = new Locale(client);
+	return locale.listCountries();
+}
+
+export async function getLocaleEUCountries(
+	client: Client
+): Promise<Models.CountryList> {
+	const locale = new Locale(client);
+	return locale.listCountriesEU();
+}
+
+export async function getLocaleCountriesPhones(
+	client: Client
+): Promise<Models.PhoneList> {
+	const locale = new Locale(client);
+	return locale.listCountriesPhones();
+}
+
+export async function getLocaleCurrencies(
+	client: Client
+): Promise<Models.CurrencyList> {
+	const locale = new Locale(client);
+	return locale.listCurrencies();
+}
+
+export async function getLocaleLanguages(
+	client: Client
+): Promise<Models.LanguageList> {
+	const locale = new Locale(client);
+	return locale.listLanguages();
+}
+
+// TOKENS FUNCTIONS
+export async function createFileToken(
+	client: Client,
+	fileId: string,
+	purpose?: string
+): Promise<Models.Token> {
+	// Note: Tokens functionality might need Account service instead of separate Tokens service
+	// This is a placeholder implementation - may need adjustment based on actual Appwrite SDK structure
+	throw new Error("Token functions require Account service implementation");
+}

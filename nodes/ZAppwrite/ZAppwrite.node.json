@@ -1,5 +1,5 @@
 {
-	"node": "n8n-nodes-base.nappwrite",
+	"node": "n8n-nodes-base.zappwrite",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": "Data & Storage",
@@ -11,7 +11,7 @@
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://github.com/zachhandley/n8n-appwrite-nodes"
+				"url": "https://github.com/zachhandley/n8n-nodes-zappwrite"
 			}
 		]
 	}

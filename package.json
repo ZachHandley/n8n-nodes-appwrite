@@ -1,19 +1,22 @@
 {
-  "name": "n8n-nodes-nappwrite",
-  "version": "0.71.4",
-  "description": "N8N Nodes for Appwrite starting at 1.4.X and up, will be updated.",
+  "name": "n8n-nodes-zappwrite",
+  "version": "1.0.0",
+  "description": "N8N Nodes for ZAppwrite starting at 1.7.X and up, will be updated.",
   "keywords": [
-    "n8n-community-node-package"
+    "n8n-community-node-package",
+    "appwrite",
+    "n8n-nodes",
+    "n8n"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/zachhandley/n8n-nodes-appwrite",
+  "homepage": "https://github.com/zachhandley/n8n-nodes-zappwrite",
   "author": {
     "name": "Zachary Handley",
     "email": "zach@blackleafdigital.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zachhandley/n8n-nodes-appwrite.git"
+    "url": "git+https://github.com/zachhandley/n8n-nodes-zappwrite.git"
   },
   "main": "index.js",
   "scripts": {
@@ -31,27 +34,27 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/NAppwriteApi.credentials.js"
+      "dist/credentials/ZAppwriteApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/NAppwrite/NAppwrite.node.js"
+      "dist/nodes/ZAppwrite/ZAppwrite.node.js"
     ]
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^7.15.0",
-    "eslint": "^8.56.0",
-    "eslint-plugin-n8n-nodes-base": "^1.16.1",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-n8n-nodes-base": "^1.16.3",
     "gulp": "^4.0.2",
-    "n8n-core": "*",
-    "n8n-workflow": "*",
-    "prettier": "^3.3.2",
-    "typescript": "^5.5.3"
+    "n8n-core": "^1.14.1",
+    "n8n-workflow": "^1.82.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.8.3"
   },
   "peerDependencies": {
     "n8n-workflow": "*"
   },
   "dependencies": {
-    "node-appwrite": "^14.1.0"
+    "node-appwrite": "^17.0.0"
   },
   "packageManager": "pnpm@10.0.0+sha512.b8fef5494bd3fe4cbd4edabd0745df2ee5be3e4b0b8b08fa643aa3e4c6702ccc0f00d68fa8a8c9858a735a0032485a44990ed2810526c875e416f001b17df12b"
 }
