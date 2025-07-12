@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-zappwrite",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "N8N Nodes for ZAppwrite starting at 1.7.X and up, will be updated.",
   "keywords": [
     "n8n-community-node-package",

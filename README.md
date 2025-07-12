@@ -208,8 +208,8 @@ Implement proper error handling in your workflows:
 ### Building from Source
 ```bash
 # Clone repository
-git clone https://github.com/zachhandley/n8n-nodes-zappwrite.git
-cd n8n-nodes-zappwrite
+git clone https://github.com/zachhandley/n8n-nodes-appwrite.git
+cd n8n-nodes-appwrite
 
 # Install dependencies
 pnpm install
@@ -232,12 +232,15 @@ pnpm lint
 
 - **N8N Community Nodes**: [Documentation](https://docs.n8n.io/integrations/community-nodes/)
 - **Appwrite**: [Website](https://appwrite.io) | [Documentation](https://appwrite.io/docs)
-- **GitHub Repository**: [n8n-nodes-zappwrite](https://github.com/zachhandley/n8n-nodes-zappwrite)
+- **GitHub Repository**: [n8n-nodes-appwrite](https://github.com/zachhandley/n8n-nodes-appwrite)
 - **Package Registry**: [NPM](https://www.npmjs.com/package/n8n-nodes-zappwrite)
-- **Support**: [GitHub Issues](https://github.com/zachhandley/n8n-nodes-zappwrite/issues)
+- **Support**: [GitHub Issues](https://github.com/zachhandley/n8n-nodes-appwrite/issues)
 - **Developer**: [Zachary Handley](https://zachhandley.com)
 
 ## Changelog
+
+### 1.0.1 - Fix README.md links
+- They were linking to what I thought I was gonna name the repository, not what I actually did
 
 ### 1.0.0 - ZAppwrite Rebrand
 - **Complete rebrand** from NAppwrite to ZAppwrite
@@ -262,7 +265,7 @@ MIT License - see [LICENSE.md](LICENSE.md) for details.
 ## Support
 
 For issues, questions, or contributions:
-- **GitHub Issues**: [Report bugs or request features](https://github.com/zachhandley/n8n-nodes-zappwrite/issues)
+- **GitHub Issues**: [Report bugs or request features](https://github.com/zachhandley/n8n-nodes-appwrite/issues)
 - **Documentation**: Check this README and [REBRAND.md](REBRAND.md)
 - **N8N Community**: [N8N Community Forum](https://community.n8n.io/)
 - **Appwrite Community**: [Appwrite Discord](https://appwrite.io/discord)
